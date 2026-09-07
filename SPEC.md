@@ -15,16 +15,20 @@ tech stack yet.
 
 ## Core concepts (data model, conceptual)
 
-- **Profile** — set once on first launch, editable later:
+- **Profile** — set once on first launch, editable later from a Profile screen:
   - `displayName` (how the app addresses you)
   - `sex` (male / female)
   - `heightCm`
-  - `weightKg` (current; also the first entry of bodyweight history)
   - `dateOfBirth` (date)
+  - current bodyweight is shown here; updating it adds a **BodyweightEntry**
+    (only these manual updates feed the weight metrics).
 - **MuscleGroup** — a fixed list of the popular gym groups (see below).
 - **Exercise** — a predefined exercise:
   - `name`
-  - `muscleGroup`
+  - `muscleGroup` (main group)
+  - `subGroup` (optional finer part — e.g. shoulders → front/lateral/rear delt;
+    chest → upper/lower; back → lats/traps/lower-back). v1 browses by main group;
+    sub-groups let us split a group later.
   - `image` (a figure performing it — static)
   - `animation` (how it's executed) + `description` (text)  *(assets added later)*
 - **Set** — one set of an exercise: `reps`, `weightKg`.
@@ -35,10 +39,14 @@ tech stack yet.
   workout to a day.
 - **BodyweightEntry** — `date`, `weightKg` (logged ~weekly) for the weight chart.
 
-### Muscle groups (proposed)
+### Muscle groups
 
-Chest, Back, Shoulders, Biceps, Triceps, Legs (Quads), Hamstrings, Glutes,
-Calves, Abs/Core, Forearms. *(tunable)*
+Chest, Back, Shoulders, Biceps, Triceps, Quadriceps, Hamstrings, Glutes,
+Calves, Abs/Core, Forearms.
+
+Some exercises target finer sub-parts (e.g. lateral/rear delt). v1: you enter a
+main group (e.g. Shoulders) and see its exercises; later we can split a group
+into sub-parts via each exercise's `subGroup` (front/lateral/rear delt, etc.).
 
 ---
 
@@ -97,6 +105,10 @@ A panel with sections:
 - **Exercises** — browse exercises **per muscle group**. Tapping an exercise
   shows an **animation of how it's performed** + a **text explanation**.
 - **Metrics** — dashboards & stats (below).
+- **Profile** — view/edit profile (name, sex, height, date of birth) and
+  **current bodyweight**. Updating the weight here records a new BodyweightEntry
+  (the only thing that moves the weight chart & weight metrics). A **weekly
+  reminder** nudges you to log your weight.
 
 ### 6. Metrics (dashboards)
 
@@ -107,15 +119,23 @@ All computed from local workout history:
   **per muscle group** to see sets done for that group.
 - **Average weight** — avg KG overall, and **per muscle group**.
 - **Max weight** — overall, and **per muscle group**.
-- **Bodyweight evolution** — chart over time; you log bodyweight ~weekly.
+- **Bodyweight evolution** — chart over time, from the BodyweightEntry updates
+  made in Profile (weekly reminder to log it).
 
 ---
 
-## Open questions / assumptions
+## Decisions
 
-- Onboarding: single screen vs short multi-step? (assume single screen for now)
-- Editing/deleting sets & exercises after logging — assume yes (tap to edit).
-- Bodyweight logging: prompt weekly, or manual entry from Metrics? (assume manual
-  entry, with a gentle weekly reminder — TBD)
-- Muscle group list above is a starting set; adjust as needed.
+- **Onboarding**: a single screen.
+- **Editing**: sets and exercises can be edited/deleted after logging.
+- **Bodyweight**: entered/updated in the **Profile** screen (not auto-prompted);
+  a weekly reminder nudges you; only these updates affect the weight metrics.
+- **Legs** are split into Quadriceps / Hamstrings / Calves (+ Glutes).
+- **Sub-groups**: v1 works at main-group level; exercises carry an optional
+  `subGroup` so a group (e.g. Shoulders → front/lateral/rear delt) can be split
+  later without reworking data.
+
+## Still open
+
 - Assets (exercise images + animations) sourced later.
+- Exact metric ranges/periods (last 7 days vs 4 weeks, etc.) — tune when building.
