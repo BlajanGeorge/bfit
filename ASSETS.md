@@ -31,6 +31,12 @@ transparent background, single figure, no text, no labels, no arrows, no border,
 1:1, high resolution.
 ```
 
+### Status
+
+Group cards live in `assets/muscles/<group>.png`. **10/11 done** — done: chest,
+shoulders, biceps, triceps, quadriceps, hamstrings, glutes, calves, abs,
+forearms. **Missing: back** (back view with lats/mid-back in red).
+
 ### Group-level cards to generate (11)
 
 | Group | VIEW | MUSCLE (highlight) |
