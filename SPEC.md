@@ -44,9 +44,9 @@ tech stack yet.
 Chest, Back, Shoulders, Biceps, Triceps, Quadriceps, Hamstrings, Glutes,
 Calves, Abs/Core, Forearms.
 
-Some exercises target finer sub-parts (e.g. lateral/rear delt). v1: you enter a
-main group (e.g. Shoulders) and see its exercises; later we can split a group
-into sub-parts via each exercise's `subGroup` (front/lateral/rear delt, etc.).
+Selecting a group goes **straight to its exercise list** — no sub-group screen.
+Exercises still carry an optional `subGroup` tag (metadata only, e.g. lateral/rear
+delt) but it is **not** used for navigation or cards in the app.
 
 ### Exercise catalog
 
@@ -139,9 +139,9 @@ All computed from local workout history:
 - **Bodyweight**: entered/updated in the **Profile** screen (not auto-prompted);
   a weekly reminder nudges you; only these updates affect the weight metrics.
 - **Legs** are split into Quadriceps / Hamstrings / Calves (+ Glutes).
-- **Sub-groups**: v1 works at main-group level; exercises carry an optional
-  `subGroup` so a group (e.g. Shoulders → front/lateral/rear delt) can be split
-  later without reworking data.
+- **Sub-groups**: NOT used in the UI — selecting a group lists its exercises
+  directly. `subGroup` stays only as optional metadata on exercises; no
+  sub-group screens and no sub-group card images.
 
 ## Still open
 
