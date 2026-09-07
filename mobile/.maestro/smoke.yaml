@@ -1,0 +1,4 @@
+appId: com.bfit.app
+---
+- launchApp
+- takeScreenshot: bfit-smoke
