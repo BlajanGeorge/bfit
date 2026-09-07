@@ -47,17 +47,32 @@ transparent background, single figure, no text, no labels, no arrows, no border,
 | Abs | front | abdominal muscles (core) |
 | Forearms | front | forearm muscles |
 
-### Sub-group cards (later)
+### Sub-group cards (same template, highlight only the finer part)
 
-Same style, highlighting only the finer part:
+Tip: zoom/crop toward the relevant body part for clarity, and pass the matching
+group card as style reference.
 
-- Chest → Upper, Mid, Lower pectoral
-- Back → Lats, Mid Back (rhomboids), Traps, Lower Back
-- Shoulders → Front (anterior) Delt, Lateral (side) Delt, Rear (posterior) Delt
-- Biceps → Long Head, Short Head
-- Triceps → Long Head, Lateral Head
-- Abs → Upper Abs, Lower Abs, Obliques
-- Forearms → Flexors, Extensors
+| Group | Sub-group | VIEW | MUSCLE (highlight) |
+|-------|-----------|------|--------------------|
+| Chest | Upper | front | upper (clavicular) pectoral |
+| Chest | Mid | front | mid (sternal) pectoral |
+| Chest | Lower | front | lower pectoral |
+| Back | Lats | back | latissimus dorsi (the side "wings") |
+| Back | Mid Back | back | rhomboids & mid-trapezius (between shoulder blades) |
+| Back | Traps | back | upper trapezius (neck / upper shoulders) |
+| Back | Lower Back | back | erector spinae (lower back) |
+| Shoulders | Front Delt | front | anterior deltoid (front of shoulder) |
+| Shoulders | Lateral Delt | front 3/4 | lateral (side) deltoid |
+| Shoulders | Rear Delt | back | posterior (rear) deltoid |
+| Biceps | Long Head | front | outer biceps (long head) |
+| Biceps | Short Head | front | inner biceps (short head) |
+| Triceps | Long Head | back | inner long head of triceps |
+| Triceps | Lateral Head | back | outer lateral head of triceps |
+| Abs | Upper Abs | front | upper rectus abdominis |
+| Abs | Lower Abs | front | lower rectus abdominis |
+| Abs | Obliques | front | oblique muscles (sides of the waist) |
+| Forearms | Flexors | front | forearm flexors (inner forearm) |
+| Forearms | Extensors | back | forearm extensors (outer forearm) |
 
 Later we'll also need **animations** (per exercise `id`) showing how each exercise
 is performed — separate pass.
