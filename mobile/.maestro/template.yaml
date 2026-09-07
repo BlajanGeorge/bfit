@@ -1,0 +1,37 @@
+appId: com.bfit.app
+# Creates a saved workout template and verifies it appears in the list + add flow.
+---
+- launchApp
+- tapOn: "menu"
+- tapOn: ".*My Workouts.*"
+- extendedWaitUntil:
+    visible: ".*New template.*"
+    timeout: 8000
+- tapOn: ".*New template.*"
+- extendedWaitUntil:
+    visible: "Template name"
+    timeout: 8000
+- tapOn: "e.g. Push Day"
+- inputText: "Push Day"
+- tapOn: "Template name"
+- tapOn: ".*Add exercise.*"
+- extendedWaitUntil:
+    visible: "Choose a muscle"
+    timeout: 8000
+- tapOn: ".*Chest.*"
+- extendedWaitUntil:
+    visible: ".*Barbell Bench Press.*"
+    timeout: 8000
+- tapOn: ".*Barbell Bench Press.*"
+- extendedWaitUntil:
+    visible: ".*Add to workout.*"
+    timeout: 8000
+- tapOn: ".*Add to workout.*"
+- extendedWaitUntil:
+    visible: ".*Save template.*"
+    timeout: 8000
+- tapOn: ".*Save template.*"
+- extendedWaitUntil:
+    visible: ".*Push Day.*"
+    timeout: 8000
+- takeScreenshot: template-saved
