@@ -48,6 +48,14 @@ Some exercises target finer sub-parts (e.g. lateral/rear delt). v1: you enter a
 main group (e.g. Shoulders) and see its exercises; later we can split a group
 into sub-parts via each exercise's `subGroup` (front/lateral/rear delt, etc.).
 
+### Exercise catalog
+
+The full exercise list is **finite and hardcoded** — see
+[`data/exercises.json`](data/exercises.json) (84 exercises across the 11 groups,
+each with `id`, `name`, `group`, `subGroup`). The app seeds this locally on first
+run. Add exercises by editing that file. Images/animations/descriptions get
+attached per `id` when assets arrive.
+
 ---
 
 ## Flows
