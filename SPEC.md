@@ -130,6 +130,9 @@ All computed from local workout history:
 - **Bodyweight evolution** — chart over time, from the BodyweightEntry updates
   made in Profile (weekly reminder to log it).
 
+Charts are **dashboard / Grafana-style** — clean panels with line and bar charts,
+a value + trend per panel, easy to scan.
+
 ---
 
 ## Decisions
@@ -145,5 +148,6 @@ All computed from local workout history:
 
 ## Still open
 
-- Assets (exercise images + animations) sourced later.
+- Muscle-group card images are done (11/11). **Exercise animations come later**,
+  after the flows are built.
 - Exact metric ranges/periods (last 7 days vs 4 weeks, etc.) — tune when building.
