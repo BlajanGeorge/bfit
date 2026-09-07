@@ -1,0 +1,36 @@
+appId: com.bfit.app
+# Assumes onboarding already completed (run onboarding.yaml first).
+---
+- launchApp
+- assertVisible: "B-Fit"
+- tapOn: ".*Add workout.*"
+- extendedWaitUntil:
+    visible: ".*Build from exercises.*"
+    timeout: 8000
+- tapOn: ".*Build from exercises.*"
+- extendedWaitUntil:
+    visible: ".*Add exercise.*"
+    timeout: 8000
+- tapOn: ".*Add exercise.*"
+- extendedWaitUntil:
+    visible: "Choose a muscle"
+    timeout: 8000
+- tapOn: ".*Chest.*"
+- extendedWaitUntil:
+    visible: ".*Barbell Bench Press.*"
+    timeout: 8000
+- tapOn: ".*Barbell Bench Press.*"
+- extendedWaitUntil:
+    visible: ".*Add to workout.*"
+    timeout: 8000
+- takeScreenshot: configure-exercise
+- tapOn: ".*Add to workout.*"
+- extendedWaitUntil:
+    visible: ".*Save workout.*"
+    timeout: 8000
+- takeScreenshot: build-workout
+- tapOn: ".*Save workout.*"
+- extendedWaitUntil:
+    visible: ".*Barbell Bench Press.*"
+    timeout: 8000
+- takeScreenshot: home-with-workout

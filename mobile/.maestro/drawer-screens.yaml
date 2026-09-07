@@ -1,0 +1,33 @@
+appId: com.bfit.app
+# Visits each drawer destination and screenshots it. Run after add-workout.yaml.
+---
+- launchApp
+- assertVisible: "B-Fit"
+- tapOn: "menu"
+- extendedWaitUntil:
+    visible: ".*Metrics.*"
+    timeout: 5000
+- takeScreenshot: drawer
+- tapOn: ".*Metrics.*"
+- extendedWaitUntil:
+    visible: ".*Weekly volume.*"
+    timeout: 8000
+- takeScreenshot: metrics
+- tapOn: "menu"
+- tapOn: ".*Profile.*"
+- extendedWaitUntil:
+    visible: ".*Bodyweight.*"
+    timeout: 8000
+- takeScreenshot: profile
+- tapOn: "menu"
+- tapOn: ".*My Workouts.*"
+- extendedWaitUntil:
+    visible: ".*New template.*"
+    timeout: 8000
+- takeScreenshot: my-workouts
+- tapOn: "menu"
+- tapOn: ".*Exercises.*"
+- extendedWaitUntil:
+    visible: ".*Shoulders.*"
+    timeout: 8000
+- takeScreenshot: exercises-browse

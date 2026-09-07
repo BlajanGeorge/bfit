@@ -1,0 +1,18 @@
+appId: com.bfit.app
+---
+- launchApp:
+    clearState: true
+- assertVisible: "Welcome to B-Fit"
+- tapOn: "Your name"
+- inputText: "George"
+- tapOn: "175"
+- inputText: "180"
+- tapOn: "75"
+- inputText: "82"
+- tapOn: "Sex"
+- takeScreenshot: onboarding-filled
+- tapOn: "Get started"
+- extendedWaitUntil:
+    visible: ".*No workout today.*"
+    timeout: 10000
+- takeScreenshot: onboarding-home
