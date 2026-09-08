@@ -9,7 +9,8 @@ tech stack yet.
 - **Local-first**: everything works offline; data lives on the device.
 - **Single user**: just me — no auth, no sharing, no social.
 - **Simple**: fast to log a workout, minimal taps.
-- **Units**: weights in **KG**.
+- **Units**: weights in **KG**, body measurements in **cm**, body fat in **%**.
+- **Dark mode**: the whole app uses a dark theme.
 
 ---
 
@@ -20,8 +21,13 @@ tech stack yet.
   - `sex` (male / female)
   - `heightCm`
   - `dateOfBirth` (date)
-  - current bodyweight is shown here; updating it adds a **BodyweightEntry**
-    (only these manual updates feed the weight metrics).
+  - current bodyweight is shown here; updating it (and the advanced stats below)
+    records a **BodyEntry** — only these manual updates feed the body metrics.
+- **BodyEntry** — a dated snapshot of body stats, all optional except weight:
+  - `date`, `weightKg`
+  - **advanced (optional)**: `bodyFatPct`, and measurements in cm —
+    `armCm`, `chestCm`, `shouldersCm`, `waistCm`, `glutesCm`, `quadsCm`.
+  - Advanced stats are never required; the user can fill any subset.
 - **MuscleGroup** — a fixed list of the popular gym groups (see below).
 - **Exercise** — a predefined exercise:
   - `name`
@@ -37,7 +43,7 @@ tech stack yet.
 - **SavedWorkout (template)** — a reusable workout the user builds from exercises:
   `name`, `exercises` (with default sets/reps optional). Used to quickly add a
   workout to a day.
-- **BodyweightEntry** — `date`, `weightKg` (logged ~weekly) for the weight chart.
+  (BodyEntry, defined above, is what powers the body charts.)
 
 ### Muscle groups
 
@@ -70,6 +76,8 @@ attached per `id` when assets arrive.
   - **height** (cm),
   - **weight** (kg),
   - **date of birth** (calendar / date picker).
+  - **Advanced (optional, skippable)**: body fat %, and measurements (cm) for
+    arm, chest, shoulders, waist, glutes, quads — recorded as the first BodyEntry.
 - On save → profile stored locally; this screen never shows again.
 - After the profile exists, **every launch goes straight to Home**.
 
@@ -113,25 +121,30 @@ A panel with sections:
 - **Exercises** — browse exercises **per muscle group**. Tapping an exercise
   shows an **animation of how it's performed** + a **text explanation**.
 - **Metrics** — dashboards & stats (below).
-- **Profile** — view/edit profile (name, sex, height, date of birth) and
-  **current bodyweight**. Updating the weight here records a new BodyweightEntry
-  (the only thing that moves the weight chart & weight metrics). A **weekly
-  reminder** nudges you to log your weight.
+- **Profile** — view/edit profile (name, sex, height, date of birth), current
+  **bodyweight**, and the optional **advanced stats** (body fat %, and arm /
+  chest / shoulders / waist / glutes / quads in cm). Saving here records a new
+  **BodyEntry**, which is what feeds the Body metrics. (No weight-reminder banner.)
 
 ### 6. Metrics (dashboards)
 
-All computed from local workout history:
+Metrics are split into **two sections** (tabs/segments): **Workouts** and **Body**.
 
+**Workouts** (from workout history):
 - **Workouts count** — e.g. how many workouts in the last week.
 - **Weekly volume** — total **sets** per week (evolution chart); selectable
-  **per muscle group** to see sets done for that group.
+  **per muscle group**.
 - **Average weight** — avg KG overall, and **per muscle group**.
 - **Max weight** — overall, and **per muscle group**.
-- **Bodyweight evolution** — chart over time, from the BodyweightEntry updates
-  made in Profile (weekly reminder to log it).
 
-Charts are **dashboard / Grafana-style** — clean panels with line and bar charts,
-a value + trend per panel, easy to scan.
+**Body** (from BodyEntry history, made in Profile):
+- **Bodyweight** evolution over time.
+- **Body fat %** evolution (when logged).
+- **Measurements** evolution — arm, chest, shoulders, waist, glutes, quads
+  (each a chart; only show ones that have data).
+
+Charts are **dashboard / Grafana-style** — clean dark panels with line and bar
+charts, a value + trend per panel, easy to scan.
 
 ---
 
