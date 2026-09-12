@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import {
   Animated,
   Dimensions,
+  Image,
   Pressable,
   StyleSheet,
   Text,
@@ -79,9 +80,11 @@ export function Drawer() {
           },
         ]}>
         <View style={styles.brandRow}>
-          <View style={[styles.logo, { backgroundColor: c.primary }]}>
-            <Icon name="bolt.fill" color={c.onPrimary} size={20} />
-          </View>
+          <Image
+            source={require('@/assets/images/logo-mark.png')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
           <Text style={[styles.brand, { color: c.text }]}>B-Fit</Text>
         </View>
 
@@ -120,7 +123,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.two,
   },
   brandRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two, paddingHorizontal: Spacing.two },
-  logo: { width: 36, height: 36, borderRadius: 10, alignItems: 'center', justifyContent: 'center' },
+  logo: { width: 36, height: 36 },
   brand: { fontSize: 22, fontWeight: '800' },
   item: {
     flexDirection: 'row',
