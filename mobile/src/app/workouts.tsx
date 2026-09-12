@@ -63,6 +63,9 @@ export default function Workouts() {
         <View style={{ gap: Spacing.two }}>
           {items.map((t) => (
             <Card key={t.id}>
+              <TouchableOpacity
+                onPress={() => router.push({ pathname: '/workout-template', params: { id: t.id } })}
+                accessibilityLabel={`Open ${t.name}`}>
               <View style={styles.head}>
                 <Text style={[styles.name, { color: c.text }]}>{t.name}</Text>
                 <View style={styles.actions}>
@@ -84,6 +87,7 @@ export default function Workouts() {
               <Text style={{ color: c.textSecondary, fontSize: 13, marginTop: 4 }}>
                 {t.exercises.map((e) => exerciseName(e.exerciseId)).join(' · ') || 'No exercises'}
               </Text>
+              </TouchableOpacity>
             </Card>
           ))}
         </View>
