@@ -20,10 +20,17 @@ import { DateField } from '@/components/ui/DateField'
 import { Icon } from '@/components/ui/Icon'
 import { Screen } from '@/components/ui/Screen'
 import { Spacing } from '@/constants/theme'
-import { addBodyweight, getLatestBodyweight, getProfile, saveProfile } from '@/data/repo'
-import type { Sex } from '@/domain/types'
+import { addBodyEntry, getLatestBodyEntry, getProfile, saveProfile } from '@/data/repo'
+import type { BodyStats } from '@/data/repo'
+import { BODY_MEASURES, type BodyMeasureKey, type Sex } from '@/domain/types'
 import { todayKey } from '@/domain/week'
 import { useTheme } from '@/hooks/use-theme'
+
+const numOrNull = (s: string): number | null => {
+  const n = parseFloat(s)
+  return Number.isFinite(n) && n > 0 ? n : null
+}
+const str = (n: number | null | undefined): string => (n != null ? String(n) : '')
 
 export default function Profile() {
   const c = useTheme()
@@ -35,9 +42,14 @@ export default function Profile() {
   const [dob, setDob] = useState('1995-01-01')
   const [weight, setWeight] = useState('')
   const [lastWeight, setLastWeight] = useState<number | null>(null)
+  const [bodyFat, setBodyFat] = useState('')
+  const [measures, setMeasures] = useState<Record<string, string>>({})
+
+  const setMeasure = (key: string, v: string) =>
+    setMeasures((m) => ({ ...m, [key]: v.replace(/[^0-9.]/g, '') }))
 
   const load = useCallback(async () => {
-    const [p, bw] = await Promise.all([getProfile(), getLatestBodyweight()])
+    const [p, bw] = await Promise.all([getProfile(), getLatestBodyEntry()])
     if (p) {
       setName(p.displayName)
       setSex(p.sex)
@@ -47,6 +59,10 @@ export default function Profile() {
     if (bw) {
       setLastWeight(bw.weightKg)
       setWeight(String(bw.weightKg))
+      setBodyFat(str(bw.bodyFatPct))
+      setMeasures(
+        Object.fromEntries(BODY_MEASURES.map((m) => [m.key, str(bw[m.key as BodyMeasureKey])])),
+      )
     }
   }, [])
 
@@ -62,15 +78,24 @@ export default function Profile() {
     Alert.alert('Saved', 'Your profile has been updated.')
   }
 
-  const logWeight = async () => {
+  const logBody = async () => {
     const w = parseFloat(weight)
     if (!(w > 0)) {
       Alert.alert('Invalid weight', 'Enter your current weight in kg.')
       return
     }
-    await addBodyweight(todayKey(), w)
+    const stats: BodyStats = {
+      bodyFatPct: numOrNull(bodyFat),
+      armCm: numOrNull(measures.armCm ?? ''),
+      chestCm: numOrNull(measures.chestCm ?? ''),
+      shouldersCm: numOrNull(measures.shouldersCm ?? ''),
+      waistCm: numOrNull(measures.waistCm ?? ''),
+      glutesCm: numOrNull(measures.glutesCm ?? ''),
+      quadsCm: numOrNull(measures.quadsCm ?? ''),
+    }
+    await addBodyEntry(todayKey(), w, stats)
     setLastWeight(w)
-    Alert.alert('Logged', `Bodyweight ${w} kg recorded for today.`)
+    Alert.alert('Saved', 'A new body entry was recorded for today.')
   }
 
   const age = (() => {
@@ -97,22 +122,51 @@ export default function Profile() {
           </View>
 
           <Card>
-            <Text style={[styles.section, { color: c.text }]}>Bodyweight</Text>
+            <Text style={[styles.section, { color: c.text }]}>Body stats</Text>
             <Text style={{ color: c.textSecondary, fontSize: 13, marginBottom: Spacing.two }}>
-              Log it about once a week — only these updates move your weight metrics.
+              Saving records a new dated entry — this is what feeds the Body metrics.
+              Advanced fields are optional.
             </Text>
-            <View style={styles.row}>
-              <TextInput
-                value={weight}
-                onChangeText={(t) => setWeight(t.replace(/[^0-9.]/g, ''))}
-                keyboardType="decimal-pad"
-                placeholder="kg"
-                placeholderTextColor={c.textSecondary}
-                style={[input, { flex: 1 }]}
-              />
-              <View style={{ width: Spacing.two }} />
-              <Button label="Log weight" onPress={logWeight} style={{ paddingHorizontal: Spacing.three }} />
+
+            <Text style={[styles.label, { color: c.textSecondary }]}>Bodyweight (kg)</Text>
+            <TextInput
+              value={weight}
+              onChangeText={(t) => setWeight(t.replace(/[^0-9.]/g, ''))}
+              keyboardType="decimal-pad"
+              placeholder="kg"
+              placeholderTextColor={c.textSecondary}
+              style={input}
+            />
+
+            <Text style={[styles.label, { color: c.textSecondary }]}>Body fat (%)</Text>
+            <TextInput
+              value={bodyFat}
+              onChangeText={(t) => setBodyFat(t.replace(/[^0-9.]/g, ''))}
+              keyboardType="decimal-pad"
+              placeholder="optional"
+              placeholderTextColor={c.textSecondary}
+              style={input}
+            />
+
+            <Text style={[styles.subLabel, { color: c.textSecondary }]}>Measurements (cm)</Text>
+            <View style={styles.measureGrid}>
+              {BODY_MEASURES.map((m) => (
+                <View key={m.key} style={styles.measureCell}>
+                  <Text style={[styles.label, { color: c.textSecondary }]}>{m.label}</Text>
+                  <TextInput
+                    value={measures[m.key] ?? ''}
+                    onChangeText={(t) => setMeasure(m.key, t)}
+                    keyboardType="decimal-pad"
+                    placeholder="cm"
+                    placeholderTextColor={c.textSecondary}
+                    style={input}
+                  />
+                </View>
+              ))}
             </View>
+
+            <View style={{ height: Spacing.three }} />
+            <Button label="Save body entry" onPress={logBody} />
           </Card>
 
           <View style={{ height: Spacing.three }} />
@@ -164,8 +218,11 @@ const styles = StyleSheet.create({
   hName: { fontSize: 22, fontWeight: '800' },
   section: { fontSize: 17, fontWeight: '700', marginBottom: 4 },
   label: { fontSize: 13, fontWeight: '600', marginTop: Spacing.three, marginBottom: 6 },
+  subLabel: { fontSize: 13, fontWeight: '700', marginTop: Spacing.three },
   input: { minHeight: 50, borderRadius: 12, borderWidth: StyleSheet.hairlineWidth, paddingHorizontal: Spacing.three, fontSize: 16 },
   row: { flexDirection: 'row', alignItems: 'center' },
+  measureGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
+  measureCell: { width: '48%' },
   segment: { flexDirection: 'row', gap: Spacing.two },
   segItem: { flex: 1, minHeight: 50, borderRadius: 12, borderWidth: StyleSheet.hairlineWidth, alignItems: 'center', justifyContent: 'center' },
 })

@@ -2,6 +2,7 @@
 import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import {
+  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -17,10 +18,16 @@ import { Button } from '@/components/ui/Button'
 import { DateField } from '@/components/ui/DateField'
 import { Icon } from '@/components/ui/Icon'
 import { Spacing } from '@/constants/theme'
-import { addBodyweight, saveProfile } from '@/data/repo'
-import type { Sex } from '@/domain/types'
+import { addBodyEntry, saveProfile } from '@/data/repo'
+import type { BodyStats } from '@/data/repo'
+import { BODY_MEASURES, type Sex } from '@/domain/types'
 import { todayKey } from '@/domain/week'
 import { useTheme } from '@/hooks/use-theme'
+
+const numOrNull = (s: string): number | null => {
+  const n = parseFloat(s)
+  return Number.isFinite(n) && n > 0 ? n : null
+}
 
 export default function Onboarding() {
   const c = useTheme()
@@ -33,6 +40,12 @@ export default function Onboarding() {
   const [weight, setWeight] = useState('')
   const [dob, setDob] = useState('1995-01-01')
   const [saving, setSaving] = useState(false)
+  const [showAdvanced, setShowAdvanced] = useState(false)
+  const [bodyFat, setBodyFat] = useState('')
+  const [measures, setMeasures] = useState<Record<string, string>>({})
+
+  const setMeasure = (key: string, v: string) =>
+    setMeasures((m) => ({ ...m, [key]: v.replace(/[^0-9.]/g, '') }))
 
   const heightN = parseFloat(height)
   const weightN = parseFloat(weight)
@@ -51,7 +64,16 @@ export default function Onboarding() {
         heightCm: heightN,
         dateOfBirth: dob,
       })
-      await addBodyweight(todayKey(), weightN)
+      const stats: BodyStats = {
+        bodyFatPct: numOrNull(bodyFat),
+        armCm: numOrNull(measures.armCm ?? ''),
+        chestCm: numOrNull(measures.chestCm ?? ''),
+        shouldersCm: numOrNull(measures.shouldersCm ?? ''),
+        waistCm: numOrNull(measures.waistCm ?? ''),
+        glutesCm: numOrNull(measures.glutesCm ?? ''),
+        quadsCm: numOrNull(measures.quadsCm ?? ''),
+      }
+      await addBodyEntry(todayKey(), weightN, stats)
       router.replace('/home')
     } catch {
       setSaving(false)
@@ -67,9 +89,11 @@ export default function Onboarding() {
       <ScrollView
         contentContainerStyle={{ padding: Spacing.four, paddingTop: insets.top + Spacing.five, paddingBottom: insets.bottom + Spacing.six }}
         keyboardShouldPersistTaps="handled">
-        <View style={[styles.logo, { backgroundColor: c.primary }]}>
-          <Icon name="bolt.fill" color={c.onPrimary} size={30} />
-        </View>
+        <Image
+          source={require('@/assets/images/logo-mark.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
         <Text style={[styles.h1, { color: c.text }]}>Welcome to B-Fit</Text>
         <Text style={[styles.sub, { color: c.textSecondary }]}>
           Let&apos;s set up your profile. This stays on your device.
@@ -135,6 +159,48 @@ export default function Onboarding() {
         <View style={{ height: Spacing.three }} />
         <DateField label="Date of birth" value={dob} onChange={setDob} />
 
+        <View style={{ height: Spacing.four }} />
+        <TouchableOpacity
+          onPress={() => setShowAdvanced((v) => !v)}
+          style={[styles.advToggle, { borderColor: c.border, backgroundColor: c.backgroundElement }]}>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: c.text, fontWeight: '700', fontSize: 15 }}>Advanced body stats</Text>
+            <Text style={{ color: c.textSecondary, fontSize: 12, marginTop: 2 }}>
+              Optional — body fat % and measurements. You can skip this.
+            </Text>
+          </View>
+          <Icon name={showAdvanced ? 'chevron.up' : 'chevron.down'} color={c.textSecondary} size={16} />
+        </TouchableOpacity>
+
+        {showAdvanced && (
+          <View style={{ marginTop: Spacing.three }}>
+            <Text style={[styles.label, { color: c.textSecondary }]}>Body fat (%)</Text>
+            <TextInput
+              value={bodyFat}
+              onChangeText={(t) => setBodyFat(t.replace(/[^0-9.]/g, ''))}
+              placeholder="e.g. 18"
+              keyboardType="decimal-pad"
+              placeholderTextColor={c.textSecondary}
+              style={input}
+            />
+            <View style={styles.measureGrid}>
+              {BODY_MEASURES.map((m) => (
+                <View key={m.key} style={styles.measureCell}>
+                  <Text style={[styles.label, { color: c.textSecondary }]}>{m.label} (cm)</Text>
+                  <TextInput
+                    value={measures[m.key] ?? ''}
+                    onChangeText={(t) => setMeasure(m.key, t)}
+                    placeholder="cm"
+                    keyboardType="decimal-pad"
+                    placeholderTextColor={c.textSecondary}
+                    style={input}
+                  />
+                </View>
+              ))}
+            </View>
+          </View>
+        )}
+
         <View style={{ height: Spacing.five }} />
         <Button label={saving ? 'Saving…' : 'Get started'} onPress={onSave} disabled={!valid || saving} />
       </ScrollView>
@@ -143,7 +209,7 @@ export default function Onboarding() {
 }
 
 const styles = StyleSheet.create({
-  logo: { width: 60, height: 60, borderRadius: 16, alignItems: 'center', justifyContent: 'center', marginBottom: Spacing.three },
+  logo: { width: 60, height: 60, marginBottom: Spacing.three },
   h1: { fontSize: 28, fontWeight: '800' },
   sub: { fontSize: 15, marginTop: 6 },
   label: { fontSize: 13, fontWeight: '600', marginTop: Spacing.three, marginBottom: 6 },
@@ -164,4 +230,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   row: { flexDirection: 'row' },
+  advToggle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+    borderRadius: 12,
+    borderWidth: StyleSheet.hairlineWidth,
+    padding: Spacing.three,
+  },
+  measureGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
+  measureCell: { width: '48%' },
 })

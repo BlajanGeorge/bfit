@@ -4,7 +4,7 @@ export type Sex = 'male' | 'female'
 
 export type MuscleGroup =
   | 'Chest' | 'Back' | 'Shoulders' | 'Biceps' | 'Triceps'
-  | 'Quadriceps' | 'Hamstrings' | 'Glutes' | 'Calves' | 'Abs' | 'Forearms'
+  | 'Quadriceps' | 'Hamstrings' | 'Glutes' | 'Calves' | 'Abs'
 
 export interface Profile {
   displayName: string
@@ -19,6 +19,7 @@ export interface Exercise {
   name: string
   group: MuscleGroup
   subGroup: string | null
+  howto?: string[]
 }
 
 export interface WorkoutSet {
@@ -45,7 +46,31 @@ export interface SavedWorkout {
   exercises: WorkoutExercise[]
 }
 
-export interface BodyweightEntry {
+/** A dated snapshot of body stats. Only weight is required; the advanced
+ *  measurements (cm) and body fat (%) are all optional. Feeds the Body metrics. */
+export interface BodyEntry {
   date: string // ISO date
   weightKg: number
+  bodyFatPct?: number | null
+  armCm?: number | null
+  chestCm?: number | null
+  shouldersCm?: number | null
+  waistCm?: number | null
+  glutesCm?: number | null
+  quadsCm?: number | null
 }
+
+/** @deprecated use BodyEntry — kept as an alias for existing imports. */
+export type BodyweightEntry = BodyEntry
+
+/** The optional advanced measurement fields on a BodyEntry, in display order. */
+export const BODY_MEASURES = [
+  { key: 'armCm', label: 'Arm', unit: 'cm' },
+  { key: 'chestCm', label: 'Chest', unit: 'cm' },
+  { key: 'shouldersCm', label: 'Shoulders', unit: 'cm' },
+  { key: 'waistCm', label: 'Waist', unit: 'cm' },
+  { key: 'glutesCm', label: 'Glutes', unit: 'cm' },
+  { key: 'quadsCm', label: 'Quads', unit: 'cm' },
+] as const
+
+export type BodyMeasureKey = (typeof BODY_MEASURES)[number]['key']

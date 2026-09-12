@@ -1,6 +1,6 @@
 // Data access for profile, workouts, templates and bodyweight.
 import type {
-  BodyweightEntry,
+  BodyEntry,
   Profile,
   SavedWorkout,
   Sex,
@@ -45,31 +45,100 @@ export async function saveProfile(p: Profile): Promise<void> {
   )
 }
 
-// ---- Bodyweight -------------------------------------------------------------
+// ---- Body entries -----------------------------------------------------------
 
-export async function addBodyweight(day: string, weightKg: number): Promise<void> {
+interface BodyRow {
+  day: string
+  weight_kg: number
+  body_fat_pct: number | null
+  arm_cm: number | null
+  chest_cm: number | null
+  shoulders_cm: number | null
+  waist_cm: number | null
+  glutes_cm: number | null
+  quads_cm: number | null
+}
+
+const BODY_COLS =
+  'day, weight_kg, body_fat_pct, arm_cm, chest_cm, shoulders_cm, waist_cm, glutes_cm, quads_cm'
+
+function toBodyEntry(r: BodyRow): BodyEntry {
+  return {
+    date: r.day,
+    weightKg: r.weight_kg,
+    bodyFatPct: r.body_fat_pct,
+    armCm: r.arm_cm,
+    chestCm: r.chest_cm,
+    shouldersCm: r.shoulders_cm,
+    waistCm: r.waist_cm,
+    glutesCm: r.glutes_cm,
+    quadsCm: r.quads_cm,
+  }
+}
+
+/** Advanced (all optional) stats recorded alongside a bodyweight entry. */
+export type BodyStats = Omit<BodyEntry, 'date' | 'weightKg'>
+
+export async function addBodyEntry(
+  day: string,
+  weightKg: number,
+  stats: BodyStats = {},
+): Promise<void> {
   const db = await getDb()
   await db.runAsync(
-    'INSERT INTO bodyweight_entries (id, day, weight_kg) VALUES (?, ?, ?)',
-    [uid(), day, weightKg],
+    `INSERT INTO bodyweight_entries
+       (id, day, weight_kg, body_fat_pct, arm_cm, chest_cm, shoulders_cm, waist_cm, glutes_cm, quads_cm)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+     ON CONFLICT(day) DO UPDATE SET
+       weight_kg = excluded.weight_kg,
+       body_fat_pct = excluded.body_fat_pct,
+       arm_cm = excluded.arm_cm,
+       chest_cm = excluded.chest_cm,
+       shoulders_cm = excluded.shoulders_cm,
+       waist_cm = excluded.waist_cm,
+       glutes_cm = excluded.glutes_cm,
+       quads_cm = excluded.quads_cm`,
+    [
+      uid(),
+      day,
+      weightKg,
+      stats.bodyFatPct ?? null,
+      stats.armCm ?? null,
+      stats.chestCm ?? null,
+      stats.shouldersCm ?? null,
+      stats.waistCm ?? null,
+      stats.glutesCm ?? null,
+      stats.quadsCm ?? null,
+    ],
   )
 }
 
-export async function getBodyweightEntries(): Promise<BodyweightEntry[]> {
-  const db = await getDb()
-  const rows = await db.getAllAsync<{ day: string; weight_kg: number }>(
-    'SELECT day, weight_kg FROM bodyweight_entries ORDER BY day ASC, rowid ASC',
-  )
-  return rows.map((r) => ({ date: r.day, weightKg: r.weight_kg }))
+/** @deprecated use addBodyEntry — kept for callers that only log weight. */
+export async function addBodyweight(day: string, weightKg: number): Promise<void> {
+  await addBodyEntry(day, weightKg)
 }
 
-export async function getLatestBodyweight(): Promise<BodyweightEntry | null> {
+export async function getBodyEntries(): Promise<BodyEntry[]> {
   const db = await getDb()
-  const r = await db.getFirstAsync<{ day: string; weight_kg: number }>(
-    'SELECT day, weight_kg FROM bodyweight_entries ORDER BY day DESC, rowid DESC LIMIT 1',
+  const rows = await db.getAllAsync<BodyRow>(
+    `SELECT ${BODY_COLS} FROM bodyweight_entries ORDER BY day ASC, rowid ASC`,
   )
-  return r ? { date: r.day, weightKg: r.weight_kg } : null
+  return rows.map(toBodyEntry)
 }
+
+/** @deprecated use getBodyEntries. */
+export const getBodyweightEntries = getBodyEntries
+
+export async function getLatestBodyEntry(): Promise<BodyEntry | null> {
+  const db = await getDb()
+  const r = await db.getFirstAsync<BodyRow>(
+    `SELECT ${BODY_COLS} FROM bodyweight_entries ORDER BY day DESC, rowid DESC LIMIT 1`,
+  )
+  return r ? toBodyEntry(r) : null
+}
+
+/** @deprecated use getLatestBodyEntry. */
+export const getLatestBodyweight = getLatestBodyEntry
 
 // ---- Workouts ---------------------------------------------------------------
 

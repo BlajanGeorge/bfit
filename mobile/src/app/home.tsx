@@ -1,5 +1,4 @@
 // Home: week strip + the selected day's workout (expandable) or an empty state.
-import { differenceInCalendarDays } from 'date-fns'
 import { useFocusEffect, useRouter } from 'expo-router'
 import { useCallback, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
@@ -11,11 +10,7 @@ import { Icon } from '@/components/ui/Icon'
 import { Screen } from '@/components/ui/Screen'
 import { Spacing } from '@/constants/theme'
 import { exerciseName, groupOf } from '@/data/catalog'
-import {
-  getLatestBodyweight,
-  getWorkoutByDate,
-  getWorkoutDays,
-} from '@/data/repo'
+import { getWorkoutByDate, getWorkoutDays } from '@/data/repo'
 import type { Workout } from '@/domain/types'
 import { dayLabel, todayKey } from '@/domain/week'
 import { useTheme } from '@/hooks/use-theme'
@@ -28,24 +23,13 @@ export default function Home() {
   const [workout, setWorkout] = useState<Workout | null>(null)
   const [days, setDays] = useState<Set<string>>(new Set())
   const [expanded, setExpanded] = useState<Set<number>>(new Set())
-  const [staleWeight, setStaleWeight] = useState(false)
   const startDay = useBuilder((s) => s.startDay)
 
   const load = useCallback(async () => {
-    const [w, d, bw] = await Promise.all([
-      getWorkoutByDate(selected),
-      getWorkoutDays(),
-      getLatestBodyweight(),
-    ])
+    const [w, d] = await Promise.all([getWorkoutByDate(selected), getWorkoutDays()])
     setWorkout(w)
     setDays(d)
     setExpanded(new Set())
-    if (bw) {
-      const [y, m, dd] = bw.date.split('-').map(Number)
-      setStaleWeight(differenceInCalendarDays(new Date(), new Date(y, m - 1, dd)) >= 7)
-    } else {
-      setStaleWeight(true)
-    }
   }, [selected])
 
   useFocusEffect(
@@ -83,16 +67,6 @@ export default function Home() {
             </TouchableOpacity>
           )}
         </View>
-
-        {staleWeight && (
-          <TouchableOpacity onPress={() => router.push('/profile')}>
-            <Card style={[styles.nudge, { borderColor: c.primary }]}>
-              <Icon name="scalemass.fill" color={c.primary} size={20} />
-              <Text style={{ color: c.text, flex: 1 }}>Time to log your weight this week.</Text>
-              <Icon name="chevron.right" color={c.textSecondary} size={16} />
-            </Card>
-          </TouchableOpacity>
-        )}
 
         {!hasWorkout ? (
           <View style={styles.empty}>
@@ -152,7 +126,6 @@ const styles = StyleSheet.create({
   dayHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   dayLabel: { fontSize: 22, fontWeight: '800' },
   editBtn: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  nudge: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two, marginTop: Spacing.three },
   empty: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: Spacing.two, paddingHorizontal: Spacing.four },
   emptyText: { fontSize: 16, textAlign: 'center' },
   exRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three },
