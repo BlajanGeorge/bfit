@@ -57,7 +57,7 @@ delt) but it is **not** used for navigation or cards in the app.
 ### Exercise catalog
 
 The full exercise list is **finite and hardcoded** — see
-[`data/exercises.json`](data/exercises.json) (84 exercises across the 11 groups,
+[`data/exercises.json`](data/exercises.json) (78 exercises across the 11 groups,
 each with `id`, `name`, `group`, `subGroup`). The app seeds this locally on first
 run. Add exercises by editing that file. Images/animations/descriptions get
 attached per `id` when assets arrive.

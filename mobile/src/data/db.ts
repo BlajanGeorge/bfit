@@ -80,6 +80,11 @@ async function seedCatalog(db: SQLite.SQLiteDatabase): Promise<void> {
         [e.id, e.name, e.group, e.subGroup],
       )
     }
+    const ids = CATALOG.map((e) => e.id)
+    await db.runAsync(
+      `DELETE FROM exercises WHERE id NOT IN (${ids.map(() => '?').join(',')})`,
+      ids,
+    )
   })
 }
 

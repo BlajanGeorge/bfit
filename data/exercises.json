@@ -1,100 +1,942 @@
 {
   "_note": "B-Fit exercise catalog — finite, hardcoded/seeded with the app. Fields: id (slug), name, group, subGroup (nullable). image/animation/description added later with assets.",
-  "groups": ["Chest", "Back", "Shoulders", "Biceps", "Triceps", "Quadriceps", "Hamstrings", "Glutes", "Calves", "Abs", "Forearms"],
+  "groups": [
+    "Chest",
+    "Back",
+    "Shoulders",
+    "Biceps",
+    "Triceps",
+    "Quadriceps",
+    "Hamstrings",
+    "Glutes",
+    "Calves",
+    "Abs",
+    "Forearms"
+  ],
   "exercises": [
-    { "id": "bench-press", "name": "Barbell Bench Press", "group": "Chest", "subGroup": "Mid" },
-    { "id": "incline-bench-press", "name": "Incline Barbell Bench Press", "group": "Chest", "subGroup": "Upper" },
-    { "id": "decline-bench-press", "name": "Decline Barbell Bench Press", "group": "Chest", "subGroup": "Lower" },
-    { "id": "db-bench-press", "name": "Dumbbell Bench Press", "group": "Chest", "subGroup": "Mid" },
-    { "id": "incline-db-press", "name": "Incline Dumbbell Press", "group": "Chest", "subGroup": "Upper" },
-    { "id": "db-fly", "name": "Dumbbell Fly", "group": "Chest", "subGroup": "Mid" },
-    { "id": "incline-db-fly", "name": "Incline Dumbbell Fly", "group": "Chest", "subGroup": "Upper" },
-    { "id": "cable-crossover", "name": "Cable Crossover", "group": "Chest", "subGroup": "Mid" },
-    { "id": "pec-deck", "name": "Pec Deck (Machine Fly)", "group": "Chest", "subGroup": "Mid" },
-    { "id": "machine-chest-press", "name": "Machine Chest Press", "group": "Chest", "subGroup": "Mid" },
-    { "id": "push-up", "name": "Push-Up", "group": "Chest", "subGroup": "Mid" },
-    { "id": "chest-dip", "name": "Chest Dip", "group": "Chest", "subGroup": "Lower" },
-
-    { "id": "deadlift", "name": "Deadlift", "group": "Back", "subGroup": "Lower Back" },
-    { "id": "pull-up", "name": "Pull-Up", "group": "Back", "subGroup": "Lats" },
-    { "id": "chin-up", "name": "Chin-Up", "group": "Back", "subGroup": "Lats" },
-    { "id": "lat-pulldown", "name": "Lat Pulldown", "group": "Back", "subGroup": "Lats" },
-    { "id": "bent-over-row", "name": "Bent-Over Barbell Row", "group": "Back", "subGroup": "Mid Back" },
-    { "id": "db-row", "name": "One-Arm Dumbbell Row", "group": "Back", "subGroup": "Lats" },
-    { "id": "seated-cable-row", "name": "Seated Cable Row", "group": "Back", "subGroup": "Mid Back" },
-    { "id": "t-bar-row", "name": "T-Bar Row", "group": "Back", "subGroup": "Mid Back" },
-    { "id": "straight-arm-pulldown", "name": "Straight-Arm Pulldown", "group": "Back", "subGroup": "Lats" },
-    { "id": "shrug", "name": "Barbell Shrug", "group": "Back", "subGroup": "Traps" },
-    { "id": "back-extension", "name": "Back Extension (Hyperextension)", "group": "Back", "subGroup": "Lower Back" },
-
-    { "id": "overhead-press", "name": "Overhead Barbell Press", "group": "Shoulders", "subGroup": "Front Delt" },
-    { "id": "db-shoulder-press", "name": "Dumbbell Shoulder Press", "group": "Shoulders", "subGroup": "Front Delt" },
-    { "id": "arnold-press", "name": "Arnold Press", "group": "Shoulders", "subGroup": "Front Delt" },
-    { "id": "machine-shoulder-press", "name": "Machine Shoulder Press", "group": "Shoulders", "subGroup": "Front Delt" },
-    { "id": "lateral-raise", "name": "Dumbbell Lateral Raise", "group": "Shoulders", "subGroup": "Lateral Delt" },
-    { "id": "cable-lateral-raise", "name": "Cable Lateral Raise", "group": "Shoulders", "subGroup": "Lateral Delt" },
-    { "id": "front-raise", "name": "Front Raise", "group": "Shoulders", "subGroup": "Front Delt" },
-    { "id": "rear-delt-fly", "name": "Rear Delt Fly (Reverse Fly)", "group": "Shoulders", "subGroup": "Rear Delt" },
-    { "id": "face-pull", "name": "Face Pull", "group": "Shoulders", "subGroup": "Rear Delt" },
-    { "id": "upright-row", "name": "Upright Row", "group": "Shoulders", "subGroup": "Lateral Delt" },
-
-    { "id": "barbell-curl", "name": "Barbell Curl", "group": "Biceps", "subGroup": null },
-    { "id": "db-curl", "name": "Dumbbell Curl", "group": "Biceps", "subGroup": null },
-    { "id": "hammer-curl", "name": "Hammer Curl", "group": "Biceps", "subGroup": null },
-    { "id": "preacher-curl", "name": "Preacher Curl", "group": "Biceps", "subGroup": "Short Head" },
-    { "id": "incline-db-curl", "name": "Incline Dumbbell Curl", "group": "Biceps", "subGroup": "Long Head" },
-    { "id": "concentration-curl", "name": "Concentration Curl", "group": "Biceps", "subGroup": null },
-    { "id": "cable-curl", "name": "Cable Curl", "group": "Biceps", "subGroup": null },
-    { "id": "ez-bar-curl", "name": "EZ-Bar Curl", "group": "Biceps", "subGroup": null },
-
-    { "id": "close-grip-bench", "name": "Close-Grip Bench Press", "group": "Triceps", "subGroup": null },
-    { "id": "triceps-pushdown", "name": "Triceps Pushdown", "group": "Triceps", "subGroup": "Lateral Head" },
-    { "id": "rope-pushdown", "name": "Rope Pushdown", "group": "Triceps", "subGroup": "Lateral Head" },
-    { "id": "overhead-triceps-ext", "name": "Overhead Triceps Extension", "group": "Triceps", "subGroup": "Long Head" },
-    { "id": "skull-crusher", "name": "Skull Crushers", "group": "Triceps", "subGroup": "Long Head" },
-    { "id": "triceps-dip", "name": "Triceps Dip", "group": "Triceps", "subGroup": null },
-    { "id": "db-kickback", "name": "Dumbbell Kickback", "group": "Triceps", "subGroup": "Lateral Head" },
-
-    { "id": "back-squat", "name": "Back Squat", "group": "Quadriceps", "subGroup": null },
-    { "id": "front-squat", "name": "Front Squat", "group": "Quadriceps", "subGroup": null },
-    { "id": "leg-press", "name": "Leg Press", "group": "Quadriceps", "subGroup": null },
-    { "id": "leg-extension", "name": "Leg Extension", "group": "Quadriceps", "subGroup": null },
-    { "id": "hack-squat", "name": "Hack Squat", "group": "Quadriceps", "subGroup": null },
-    { "id": "bulgarian-split-squat", "name": "Bulgarian Split Squat", "group": "Quadriceps", "subGroup": null },
-    { "id": "lunge", "name": "Walking Lunge", "group": "Quadriceps", "subGroup": null },
-    { "id": "goblet-squat", "name": "Goblet Squat", "group": "Quadriceps", "subGroup": null },
-
-    { "id": "romanian-deadlift", "name": "Romanian Deadlift", "group": "Hamstrings", "subGroup": null },
-    { "id": "lying-leg-curl", "name": "Lying Leg Curl", "group": "Hamstrings", "subGroup": null },
-    { "id": "seated-leg-curl", "name": "Seated Leg Curl", "group": "Hamstrings", "subGroup": null },
-    { "id": "stiff-leg-deadlift", "name": "Stiff-Leg Deadlift", "group": "Hamstrings", "subGroup": null },
-    { "id": "good-morning", "name": "Good Morning", "group": "Hamstrings", "subGroup": null },
-    { "id": "nordic-curl", "name": "Nordic Hamstring Curl", "group": "Hamstrings", "subGroup": null },
-
-    { "id": "hip-thrust", "name": "Barbell Hip Thrust", "group": "Glutes", "subGroup": null },
-    { "id": "glute-bridge", "name": "Glute Bridge", "group": "Glutes", "subGroup": null },
-    { "id": "cable-kickback", "name": "Cable Glute Kickback", "group": "Glutes", "subGroup": null },
-    { "id": "sumo-deadlift", "name": "Sumo Deadlift", "group": "Glutes", "subGroup": null },
-    { "id": "step-up", "name": "Step-Up", "group": "Glutes", "subGroup": null },
-
-    { "id": "standing-calf-raise", "name": "Standing Calf Raise", "group": "Calves", "subGroup": null },
-    { "id": "seated-calf-raise", "name": "Seated Calf Raise", "group": "Calves", "subGroup": null },
-    { "id": "leg-press-calf-raise", "name": "Leg Press Calf Raise", "group": "Calves", "subGroup": null },
-    { "id": "donkey-calf-raise", "name": "Donkey Calf Raise", "group": "Calves", "subGroup": null },
-
-    { "id": "crunch", "name": "Crunch", "group": "Abs", "subGroup": null },
-    { "id": "hanging-leg-raise", "name": "Hanging Leg Raise", "group": "Abs", "subGroup": "Lower Abs" },
-    { "id": "plank", "name": "Plank", "group": "Abs", "subGroup": null },
-    { "id": "cable-crunch", "name": "Cable Crunch", "group": "Abs", "subGroup": "Upper Abs" },
-    { "id": "russian-twist", "name": "Russian Twist", "group": "Abs", "subGroup": "Obliques" },
-    { "id": "ab-wheel", "name": "Ab Wheel Rollout", "group": "Abs", "subGroup": null },
-    { "id": "bicycle-crunch", "name": "Bicycle Crunch", "group": "Abs", "subGroup": "Obliques" },
-    { "id": "sit-up", "name": "Sit-Up", "group": "Abs", "subGroup": null },
-
-    { "id": "wrist-curl", "name": "Wrist Curl", "group": "Forearms", "subGroup": "Flexors" },
-    { "id": "reverse-wrist-curl", "name": "Reverse Wrist Curl", "group": "Forearms", "subGroup": "Extensors" },
-    { "id": "reverse-curl", "name": "Reverse Curl", "group": "Forearms", "subGroup": "Extensors" },
-    { "id": "farmers-carry", "name": "Farmer's Carry", "group": "Forearms", "subGroup": null },
-    { "id": "wrist-roller", "name": "Wrist Roller", "group": "Forearms", "subGroup": null }
+    {
+      "id": "bench-press",
+      "name": "Barbell Bench Press",
+      "group": "Chest",
+      "subGroup": null,
+      "howto": [
+        "Lie on the bench, eyes under the bar, feet planted.",
+        "Grip slightly wider than shoulder-width; retract + squeeze your shoulder blades throughout.",
+        "Lower the bar to mid-chest, elbows about 45° from your torso.",
+        "Press up and slightly back until arms are straight; never bounce the bar."
+      ]
+    },
+    {
+      "id": "incline-bench-press",
+      "name": "Incline Barbell Bench Press",
+      "group": "Chest",
+      "subGroup": "Upper",
+      "howto": [
+        "Set the bench at 30–45°; grip just outside shoulder-width.",
+        "Pinch your shoulder blades and plant your feet.",
+        "Lower the bar to your upper chest, elbows tucked ~45°.",
+        "Press up to lockout, keeping your head and hips on the bench."
+      ]
+    },
+    {
+      "id": "decline-bench-press",
+      "name": "Decline Barbell Bench Press",
+      "group": "Chest",
+      "subGroup": "Lower",
+      "howto": [
+        "Secure your feet under the pads; grip just outside shoulder-width.",
+        "Keep shoulder blades retracted and the bar over your mid/lower chest.",
+        "Lower in a straight line, elbows at ~45°.",
+        "Press straight up to lockout; avoid arching your lower back."
+      ]
+    },
+    {
+      "id": "db-bench-press",
+      "name": "Dumbbell Bench Press",
+      "group": "Chest",
+      "subGroup": null,
+      "howto": [
+        "Kick the dumbbells to shoulder line, feet planted, shoulder blades retracted.",
+        "Press the weights straight up until arms are straight, knuckles slightly inward.",
+        "Lower with control until your elbows reach just below the bench line.",
+        "Keep the weights moving in a straight, balanced line."
+      ]
+    },
+    {
+      "id": "incline-db-press",
+      "name": "Incline Dumbbell Press",
+      "group": "Chest",
+      "subGroup": "Upper",
+      "howto": [
+        "Lie on an incline bench at 30–45°, dumbbells at shoulder height.",
+        "Press up and slightly together toward your upper chest.",
+        "Lower until you feel a stretch in the upper chest.",
+        "Keep your shoulder blades retracted; don't let your elbows flare wide."
+      ]
+    },
+    {
+      "id": "db-fly",
+      "name": "Dumbbell Fly",
+      "group": "Chest",
+      "subGroup": null,
+      "howto": [
+        "Lie flat, dumbbells held straight above your chest, palms facing.",
+        "Keep a slight bend in your elbows for the whole set.",
+        "Lower the weights out to your sides in a wide arc until you feel a chest stretch.",
+        "Reverse the arc back to the top, squeezing your chest."
+      ]
+    },
+    {
+      "id": "incline-db-fly",
+      "name": "Incline Dumbbell Fly",
+      "group": "Chest",
+      "subGroup": "Upper",
+      "howto": [
+        "Set the bench at 30–45°; hold dumbbells above your chest, palms in.",
+        "With soft elbows, lower them out to the sides until a gentle chest stretch.",
+        "Keep the arc constant; don't let the elbows drop below your shoulders.",
+        "Squeeze back together along the same arc."
+      ]
+    },
+    {
+      "id": "cable-crossover",
+      "name": "Cable Crossover",
+      "group": "Chest",
+      "subGroup": null,
+      "howto": [
+        "Set both pulleys high; take a staggered stance, one foot forward.",
+        "Lean slightly forward from the hips, arms wide at shoulder height.",
+        "Pull the handles down and across in front of your chest until your hands meet.",
+        "Return slowly to the start, controlling the stretch."
+      ]
+    },
+    {
+      "id": "pec-deck",
+      "name": "Pec Deck (Machine Fly)",
+      "group": "Chest",
+      "subGroup": null,
+      "howto": [
+        "Adjust the seat so the handles align with your mid-chest.",
+        "Sit tall with your back flat against the pad.",
+        "Bring the handles together in front of you, squeezing the chest.",
+        "Return slowly until you feel a light chest stretch."
+      ]
+    },
+    {
+      "id": "machine-chest-press",
+      "name": "Machine Chest Press",
+      "group": "Chest",
+      "subGroup": null,
+      "howto": [
+        "Set the seat so handles sit at your mid-chest.",
+        "Keep your back against the pad and shoulder blades pinched.",
+        "Press the handles until your arms are almost straight.",
+        "Return under control; don't let your shoulders round forward."
+      ]
+    },
+    {
+      "id": "push-up",
+      "name": "Push-Up",
+      "group": "Chest",
+      "subGroup": null,
+      "howto": [
+        "Start in a plank, hands under shoulders, body in a straight line.",
+        "Lower until your chest nearly touches the floor, elbows ~45°.",
+        "Keep core and glutes braced so hips don't sag.",
+        "Press back up to full arm extension."
+      ]
+    },
+    {
+      "id": "chest-dip",
+      "name": "Chest Dip",
+      "group": "Chest",
+      "subGroup": "Lower",
+      "howto": [
+        "Grip the bars, lean your torso slightly forward.",
+        "Lower your body until your upper arms are near parallel to the floor.",
+        "Keep elbows out slightly and chest proud.",
+        "Press up until arms are straight; don't bounce at the bottom."
+      ]
+    },
+    {
+      "id": "deadlift",
+      "name": "Deadlift",
+      "group": "Back",
+      "subGroup": "Lower Back",
+      "howto": [
+        "Stand with the bar over mid-foot, feet hip-width apart.",
+        "Hinge down, grip just outside your legs; brace your core and flatten your back.",
+        "Drive through the floor, keeping the bar close to your shins and thighs.",
+        "Stand tall and lock out with glutes; lower under control."
+      ]
+    },
+    {
+      "id": "pull-up",
+      "name": "Pull-Up",
+      "group": "Back",
+      "subGroup": "Lats",
+      "howto": [
+        "Hang from the bar with a slightly wider than shoulder-width, overhand grip.",
+        "Drive your elbows down as you pull your chest toward the bar.",
+        "Keep your shoulders back and core tight; avoid swinging.",
+        "Lower to a full hang under control."
+      ]
+    },
+    {
+      "id": "chin-up",
+      "name": "Chin-Up",
+      "group": "Back",
+      "subGroup": "Lats",
+      "howto": [
+        "Grip the bar underhand, shoulder-width, arms fully extended.",
+        "Pull until your chin passes the bar, elbows driving down.",
+        "Keep your body still and chest up.",
+        "Lower slowly to a full hang."
+      ]
+    },
+    {
+      "id": "lat-pulldown",
+      "name": "Lat Pulldown",
+      "group": "Back",
+      "subGroup": "Lats",
+      "howto": [
+        "Set the thigh pad; grip the bar just outside shoulder-width.",
+        "Lean back slightly, chest up, and pull the bar to your upper chest.",
+        "Drive elbows down and slightly back.",
+        "Return slowly under control to full extension."
+      ]
+    },
+    {
+      "id": "bent-over-row",
+      "name": "Bent-Over Barbell Row",
+      "group": "Back",
+      "subGroup": "Mid Back",
+      "howto": [
+        "Hinge to ~45°, back flat, knees soft, bar hanging at arm's length.",
+        "Pull the bar toward your lower ribs, squeezing your shoulder blades.",
+        "Keep your torso fixed; don't yank with momentum.",
+        "Lower under control without rounding your back."
+      ]
+    },
+    {
+      "id": "db-row",
+      "name": "One-Arm Dumbbell Row",
+      "group": "Back",
+      "subGroup": "Lats",
+      "howto": [
+        "Support yourself with one hand on a bench, back flat.",
+        "Let the dumbbell hang at arm's length from your shoulder.",
+        "Row it to your hip, driving your elbow back.",
+        "Lower slowly without twisting your torso."
+      ]
+    },
+    {
+      "id": "seated-cable-row",
+      "name": "Seated Cable Row",
+      "group": "Back",
+      "subGroup": "Mid Back",
+      "howto": [
+        "Sit tall, chest up, knees slightly bent, feet braced.",
+        "Pull the handle to your stomach, squeezing your shoulder blades.",
+        "Keep your torso upright; avoid swinging back.",
+        "Return until your arms are straight but shoulders stay back."
+      ]
+    },
+    {
+      "id": "straight-arm-pulldown",
+      "name": "Straight-Arm Pulldown",
+      "group": "Back",
+      "subGroup": "Lats",
+      "howto": [
+        "Set the rope/bar high; face the cable with a slight forward lean.",
+        "Keep your arms nearly straight throughout.",
+        "Pull the attachment down to your thighs, driving your lats.",
+        "Return up slowly until you feel a stretch; don't use momentum."
+      ]
+    },
+    {
+      "id": "shrug",
+      "name": "Barbell Shrug",
+      "group": "Back",
+      "subGroup": "Traps",
+      "howto": [
+        "Hold a barbell at arm's length, feet shoulder-width.",
+        "Raise your shoulders straight up toward your ears.",
+        "Pause at the top, then lower slowly.",
+        "Don't roll your shoulders; move vertically only."
+      ]
+    },
+    {
+      "id": "back-extension",
+      "name": "Back Extension (Hyperextension)",
+      "group": "Back",
+      "subGroup": "Lower Back",
+      "howto": [
+        "Set the pad around hip height; secure your heels.",
+        "Start with your torso bent ~90°, back flat.",
+        "Raise your torso until it's in line with your legs.",
+        "Lower under control; don't hyperextend past straight."
+      ]
+    },
+    {
+      "id": "overhead-press",
+      "name": "Overhead Barbell Press",
+      "group": "Shoulders",
+      "subGroup": "Front Delt",
+      "howto": [
+        "Grip the bar just outside shoulder-width, resting on your upper chest/front delts.",
+        "Brace core and squeeze glutes to protect your lower back.",
+        "Press straight up, moving your head back as the bar clears.",
+        "Lock out overhead, then lower to your chest under control."
+      ]
+    },
+    {
+      "id": "db-shoulder-press",
+      "name": "Dumbbell Shoulder Press",
+      "group": "Shoulders",
+      "subGroup": "Front Delt",
+      "howto": [
+        "Sit (or stand) with dumbbells at shoulder height, palms forward.",
+        "Press both weights straight overhead until arms are straight.",
+        "Keep the weights in line with your shoulders; don't flare ribs.",
+        "Lower slowly to shoulder height."
+      ]
+    },
+    {
+      "id": "machine-shoulder-press",
+      "name": "Machine Shoulder Press",
+      "group": "Shoulders",
+      "subGroup": "Front Delt",
+      "howto": [
+        "Set the seat so handles are level with your shoulders.",
+        "Keep your back against the pad throughout.",
+        "Press the handles up until arms are straight.",
+        "Lower under control to just below your ears."
+      ]
+    },
+    {
+      "id": "lateral-raise",
+      "name": "Dumbbell Lateral Raise",
+      "group": "Shoulders",
+      "subGroup": "Lateral Delt",
+      "howto": [
+        "Stand with dumbbells at your sides, soft elbows, palms in.",
+        "Raise your arms out to the sides until shoulders height.",
+        "Lead with your elbows, not your hands.",
+        "Lower slowly; avoid swinging or shrugging."
+      ]
+    },
+    {
+      "id": "cable-lateral-raise",
+      "name": "Cable Lateral Raise",
+      "group": "Shoulders",
+      "subGroup": "Lateral Delt",
+      "howto": [
+        "Stand side-on to a low cable, handle in the far hand.",
+        "Raise your arm out to the side to shoulder height.",
+        "Keep your body tall and still.",
+        "Lower under control; hold the stretch briefly."
+      ]
+    },
+    {
+      "id": "front-raise",
+      "name": "Front Raise",
+      "group": "Shoulders",
+      "subGroup": "Front Delt",
+      "howto": [
+        "Hold dumbbells in front of your thighs, palms down.",
+        "Raise one arm straight forward to shoulder height.",
+        "Keep the motion smooth and controlled.",
+        "Lower slowly; don't lean back or swing."
+      ]
+    },
+    {
+      "id": "rear-delt-fly",
+      "name": "Rear Delt Fly (Reverse Fly)",
+      "group": "Shoulders",
+      "subGroup": "Rear Delt",
+      "howto": [
+        "Hinge forward with a flat back (seated or using a bench).",
+        "Hold dumbbells hanging below your chest, palms in.",
+        "Raise your arms out to the sides, squeezing the rear delts.",
+        "Lower slowly; keep your back flat and chest down."
+      ]
+    },
+    {
+      "id": "face-pull",
+      "name": "Face Pull",
+      "group": "Shoulders",
+      "subGroup": "Rear Delt",
+      "howto": [
+        "Set a rope attachment to a cable at upper-chest/face height.",
+        "Grip the rope with palms facing each other, step back to tension.",
+        "Pull the rope toward your face, splitting the ends apart at the end.",
+        "Finish with hands by your ears and elbows high; return slowly."
+      ]
+    },
+    {
+      "id": "upright-row",
+      "name": "Upright Row",
+      "group": "Shoulders",
+      "subGroup": "Lateral Delt",
+      "howto": [
+        "Hold the bar at arm's length, hands about shoulder-width.",
+        "Pull the bar up along your body, elbows leading.",
+        "Stop at upper-chest level (or just above) to protect the shoulders.",
+        "Lower under control."
+      ]
+    },
+    {
+      "id": "barbell-curl",
+      "name": "Barbell Curl",
+      "group": "Biceps",
+      "subGroup": null,
+      "howto": [
+        "Stand with the bar at hip level, underhand, shoulder-width grip.",
+        "Curl the bar up while keeping elbows pinned to your sides.",
+        "Don't swing your hips or lean back.",
+        "Lower slowly to full extension."
+      ]
+    },
+    {
+      "id": "db-curl",
+      "name": "Dumbbell Curl",
+      "group": "Biceps",
+      "subGroup": null,
+      "howto": [
+        "Stand with dumbbells at your sides, palms forward.",
+        "Curl them up, keeping elbows close to your body.",
+        "Squeeze the biceps at the top.",
+        "Lower slowly; avoid rocking."
+      ]
+    },
+    {
+      "id": "hammer-curl",
+      "name": "Hammer Curl",
+      "group": "Biceps",
+      "subGroup": null,
+      "howto": [
+        "Hold dumbbells at your sides, palms facing in (neutral grip).",
+        "Curl the weights up, keeping the neutral grip throughout.",
+        "Keep elbows pinned to your sides.",
+        "Lower slowly under control."
+      ]
+    },
+    {
+      "id": "preacher-curl",
+      "name": "Preacher Curl",
+      "group": "Biceps",
+      "subGroup": "Short Head",
+      "howto": [
+        "Set the seat so your armpits rest on the top pad.",
+        "Grip the bar underhand, arms fully extended over the pad.",
+        "Curl up until your forearms are nearly vertical.",
+        "Lower slowly without letting your elbows lift."
+      ]
+    },
+    {
+      "id": "incline-db-curl",
+      "name": "Incline Dumbbell Curl",
+      "group": "Biceps",
+      "subGroup": "Long Head",
+      "howto": [
+        "Sit back on an incline bench, arms hanging straight down.",
+        "Curl the dumbbells up, palms facing forward.",
+        "Let your upper arms stay still; squeeze at the top.",
+        "Lower slowly until you feel a full stretch."
+      ]
+    },
+    {
+      "id": "concentration-curl",
+      "name": "Concentration Curl",
+      "group": "Biceps",
+      "subGroup": null,
+      "howto": [
+        "Sit, brace your elbow against the inside of your thigh.",
+        "Let the dumbbell hang at arm's length, palm forward.",
+        "Curl it up toward your shoulder without moving your elbow.",
+        "Lower slowly; keep your wrist straight."
+      ]
+    },
+    {
+      "id": "cable-curl",
+      "name": "Cable Curl",
+      "group": "Biceps",
+      "subGroup": null,
+      "howto": [
+        "Attach a straight/ez bar to the low pulley.",
+        "Curl the bar up with elbows pinned to your sides.",
+        "Keep your torso still throughout the set.",
+        "Lower slowly against the cable tension."
+      ]
+    },
+    {
+      "id": "close-grip-bench",
+      "name": "Close-Grip Bench Press",
+      "group": "Triceps",
+      "subGroup": null,
+      "howto": [
+        "Grip the bar about shoulder-width or slightly narrower.",
+        "Pinch shoulder blades, feet planted; keep elbows tight to your sides.",
+        "Lower the bar to your lower chest.",
+        "Press up to lockout, keeping elbows close."
+      ]
+    },
+    {
+      "id": "triceps-pushdown",
+      "name": "Triceps Pushdown",
+      "group": "Triceps",
+      "subGroup": "Lateral Head",
+      "howto": [
+        "Set the rope/bar at a high pulley; grip with elbows at your sides.",
+        "Press the attachment down until your arms are straight.",
+        "Keep elbows fixed; don't let them drift forward.",
+        "Return slowly to elbows just past 90°."
+      ]
+    },
+    {
+      "id": "rope-pushdown",
+      "name": "Rope Pushdown",
+      "group": "Triceps",
+      "subGroup": "Lateral Head",
+      "howto": [
+        "Hold the rope, elbows tucked at your sides.",
+        "Push down, splitting the rope ends apart at the bottom.",
+        "Keep your elbows still and torso upright.",
+        "Return under control until the forearms are slightly above parallel."
+      ]
+    },
+    {
+      "id": "overhead-triceps-ext",
+      "name": "Overhead Triceps Extension",
+      "group": "Triceps",
+      "subGroup": "Long Head",
+      "howto": [
+        "Hold a dumbbell over your head with both hands.",
+        "Lower it behind your head, elbows pointing forward and close.",
+        "Go until you feel a good triceps stretch.",
+        "Extend back up until arms are straight."
+      ]
+    },
+    {
+      "id": "skull-crusher",
+      "name": "Skull Crushers",
+      "group": "Triceps",
+      "subGroup": "Long Head",
+      "howto": [
+        "Lie back, hold the bar over your chest, arms straight.",
+        "Lower the bar to your forehead, bending only at the elbows.",
+        "Keep your upper arms perpendicular to the floor.",
+        "Extend back to lockout; don't let elbows flare."
+      ]
+    },
+    {
+      "id": "triceps-dip",
+      "name": "Triceps Dip",
+      "group": "Triceps",
+      "subGroup": null,
+      "howto": [
+        "Support yourself on bars, arms straight, torso upright.",
+        "Lower your body until your upper arms are near parallel to the floor.",
+        "Keep elbows tucked along your sides.",
+        "Press back up; avoid going so deep that your shoulders ache."
+      ]
+    },
+    {
+      "id": "back-squat",
+      "name": "Back Squat",
+      "group": "Quadriceps",
+      "subGroup": null,
+      "howto": [
+        "Rack the bar on your upper traps; feet shoulder-width, toes turned slightly out.",
+        "Brace your core and keep a neutral spine.",
+        "Sit down between your hips, bringing thighs to at least parallel.",
+        "Drive up through the whole foot; keep your knees tracking over your toes."
+      ]
+    },
+    {
+      "id": "leg-press",
+      "name": "Leg Press",
+      "group": "Quadriceps",
+      "subGroup": null,
+      "howto": [
+        "Set the seat so your knees reach ~90° at the bottom.",
+        "Unlock the sled; press until your legs are almost straight.",
+        "Keep your lower back and glutes on the pad.",
+        "Return under control; never let the knees collapse inward."
+      ]
+    },
+    {
+      "id": "leg-extension",
+      "name": "Leg Extension",
+      "group": "Quadriceps",
+      "subGroup": null,
+      "howto": [
+        "Align the machine's pivot with your knees.",
+        "Extend your legs until they're straight, squeezing your quads.",
+        "Keep your hips down and grip the handles.",
+        "Lower slowly without letting the weight drop."
+      ]
+    },
+    {
+      "id": "hack-squat",
+      "name": "Hack Squat",
+      "group": "Quadriceps",
+      "subGroup": null,
+      "howto": [
+        "Place feet shoulder-width on the platform, back against the pad.",
+        "Unlock the safeties and lower until your thighs are at least parallel.",
+        "Keep your lower back pressed into the pad.",
+        "Drive back up through your heels."
+      ]
+    },
+    {
+      "id": "bulgarian-split-squat",
+      "name": "Bulgarian Split Squat",
+      "group": "Quadriceps",
+      "subGroup": null,
+      "howto": [
+        "Rest your rear foot on a bench behind you.",
+        "Lower your back knee toward the floor, torso upright.",
+        "Keep your front knee tracking over your toes.",
+        "Drive up through the front heel; stay balanced."
+      ]
+    },
+    {
+      "id": "romanian-deadlift",
+      "name": "Romanian Deadlift",
+      "group": "Hamstrings",
+      "subGroup": null,
+      "howto": [
+        "Stand with the bar at hip level, knees slightly bent.",
+        "Hinge at the hips, pushing them back and sliding the bar down your thighs.",
+        "Lower to mid-shin (or until hamstring stretch) keeping a flat back.",
+        "Drive your hips forward to stand, squeezing the glutes at the top."
+      ]
+    },
+    {
+      "id": "lying-leg-curl",
+      "name": "Lying Leg Curl",
+      "group": "Hamstrings",
+      "subGroup": null,
+      "howto": [
+        "Lie face down with the pad just above your heels.",
+        "Keep your hips pressed into the bench.",
+        "Curl your heels toward your glutes.",
+        "Lower slowly to full extension."
+      ]
+    },
+    {
+      "id": "seated-leg-curl",
+      "name": "Seated Leg Curl",
+      "group": "Hamstrings",
+      "subGroup": null,
+      "howto": [
+        "Set the pad just above your ankles; align your knees with the pivot.",
+        "Curl the pad down toward your hamstrings.",
+        "Keep your hips down and back flat.",
+        "Return slowly under control."
+      ]
+    },
+    {
+      "id": "stiff-leg-deadlift",
+      "name": "Stiff-Leg Deadlift",
+      "group": "Hamstrings",
+      "subGroup": null,
+      "howto": [
+        "Hold the bar at hip height, knees nearly straight.",
+        "Hinge at the hips, pushing them back and sliding the bar down your legs.",
+        "Go until you feel a strong hamstring stretch (typically mid-shin).",
+        "Return by driving hips forward; keep your back flat throughout."
+      ]
+    },
+    {
+      "id": "good-morning",
+      "name": "Good Morning",
+      "group": "Hamstrings",
+      "subGroup": null,
+      "howto": [
+        "Rest the bar high on your traps, feet hip-width, knees soft.",
+        "Brace your core and hinge at the hips, pushing them back.",
+        "Lower your torso toward parallel with a flat back.",
+        "Return by driving your hips forward; keep your lumbar neutral."
+      ]
+    },
+    {
+      "id": "nordic-curl",
+      "name": "Nordic Hamstring Curl",
+      "group": "Hamstrings",
+      "subGroup": null,
+      "howto": [
+        "Kneel with your ankles held securely under a bench/partner.",
+        "Start with a straight line from knees to head, hips extended.",
+        "Lower your torso as slowly as you can by resisting with your hamstrings.",
+        "Catch yourself with your hands and press back up."
+      ]
+    },
+    {
+      "id": "hip-thrust",
+      "name": "Barbell Hip Thrust",
+      "group": "Glutes",
+      "subGroup": null,
+      "howto": [
+        "Rest your upper back on a bench, bar padded over your hips.",
+        "Plant your feet under your knees.",
+        "Drive your hips up until your body forms a straight line from knees to shoulders.",
+        "Squeeze glutes at the top; lower slowly."
+      ]
+    },
+    {
+      "id": "glute-bridge",
+      "name": "Glute Bridge",
+      "group": "Glutes",
+      "subGroup": null,
+      "howto": [
+        "Lie on your back, knees bent, feet flat near your hips.",
+        "Drive your hips up until your body forms a straight line from knees to shoulders.",
+        "Squeeze glutes at the top.",
+        "Lower slowly; don't arch your lower back."
+      ]
+    },
+    {
+      "id": "cable-kickback",
+      "name": "Cable Glute Kickback",
+      "group": "Glutes",
+      "subGroup": null,
+      "howto": [
+        "Attach an ankle strap to a low pulley; face the machine.",
+        "Lean slightly forward, holding it for support.",
+        "Kick your leg back and up, squeezing the glute.",
+        "Lower slowly under control; avoid arching your back."
+      ]
+    },
+    {
+      "id": "sumo-deadlift",
+      "name": "Sumo Deadlift",
+      "group": "Glutes",
+      "subGroup": null,
+      "howto": [
+        "Stand with feet wide, toes pointed out; grip the bar inside your knees.",
+        "Drop your hips, flare your knees open, brace your core.",
+        "Drive the floor away with the bar close to your body.",
+        "Lock out hips and knees together, then lower under control."
+      ]
+    },
+    {
+      "id": "step-up",
+      "name": "Step-Up",
+      "group": "Glutes",
+      "subGroup": null,
+      "howto": [
+        "Stand facing a bench at knee-to-upper-thigh height.",
+        "Place one foot fully on the bench, push through it to step up.",
+        "Bring the trailing knee up to hip height (optional).",
+        "Step down under control; keep the chest tall."
+      ]
+    },
+    {
+      "id": "standing-calf-raise",
+      "name": "Standing Calf Raise",
+      "group": "Calves",
+      "subGroup": null,
+      "howto": [
+        "Place the balls of your feet on the platform, heels hanging off.",
+        "With a soft knee, lower your heels for a deep stretch.",
+        "Rise up onto your toes as high as you can.",
+        "Pause at the top; lower slowly."
+      ]
+    },
+    {
+      "id": "seated-calf-raise",
+      "name": "Seated Calf Raise",
+      "group": "Calves",
+      "subGroup": null,
+      "howto": [
+        "Sit with the pad on your knees and the balls of your feet on the platform.",
+        "Let your heels sink for a stretch.",
+        "Press up onto your toes, rising as high as possible.",
+        "Lower slowly and pause at the bottom."
+      ]
+    },
+    {
+      "id": "leg-press-calf-raise",
+      "name": "Leg Press Calf Raise",
+      "group": "Calves",
+      "subGroup": null,
+      "howto": [
+        "Put the balls of your feet at the bottom edge of the platform.",
+        "Release the safeties and let the platform stretch your heels down.",
+        "Press up through your toes until your calves are fully flexed.",
+        "Lower slowly; don't bounce."
+      ]
+    },
+    {
+      "id": "donkey-calf-raise",
+      "name": "Donkey Calf Raise",
+      "group": "Calves",
+      "subGroup": null,
+      "howto": [
+        "Set up in the machine (or with a partner on your hips), toes on the platform.",
+        "Lower your heels for a deep stretch.",
+        "Rise onto your toes as high as possible.",
+        "Pause at the top; lower slowly."
+      ]
+    },
+    {
+      "id": "crunch",
+      "name": "Crunch",
+      "group": "Abs",
+      "subGroup": null,
+      "howto": [
+        "Lie on your back, knees bent, feet flat, hands behind your head (no pulling).",
+        "Brace your abs and curl your shoulder blades off the floor.",
+        "Keep your lower back on the ground.",
+        "Lower slowly; breathe out as you curl up."
+      ]
+    },
+    {
+      "id": "hanging-leg-raise",
+      "name": "Hanging Leg Raise",
+      "group": "Abs",
+      "subGroup": "Lower Abs",
+      "howto": [
+        "Hang from a bar with a firm grip; keep your shoulders down.",
+        "Raise your legs straight (or knees to chest) until your hips almost fold.",
+        "Keep your core tight and avoid swinging.",
+        "Lower slowly under control."
+      ]
+    },
+    {
+      "id": "plank",
+      "name": "Plank",
+      "group": "Abs",
+      "subGroup": null,
+      "howto": [
+        "Set up on forearms and toes, elbows under shoulders.",
+        "Squeeze glutes and abs to form a straight line from head to heels.",
+        "Don't let hips sag or pike up.",
+        "Hold with even breathing; stop if form breaks."
+      ]
+    },
+    {
+      "id": "cable-crunch",
+      "name": "Cable Crunch",
+      "group": "Abs",
+      "subGroup": "Upper Abs",
+      "howto": [
+        "Attach a rope to a high pulley; kneel facing the machine.",
+        "Hold the rope at your head, hands by your ears.",
+        "Crunch down, curling your ribs toward your pelvis.",
+        "Keep hips still; return up under control."
+      ]
+    },
+    {
+      "id": "russian-twist",
+      "name": "Russian Twist",
+      "group": "Abs",
+      "subGroup": "Obliques",
+      "howto": [
+        "Sit with knees bent and lean back to about 45°.",
+        "Hold a weight at your chest and lift your feet (optional).",
+        "Rotate your torso side to side, tapping the floor beside your hip.",
+        "Keep your spine tall and twist from the ribs."
+      ]
+    },
+    {
+      "id": "ab-wheel",
+      "name": "Ab Wheel Rollout",
+      "group": "Abs",
+      "subGroup": null,
+      "howto": [
+        "Kneel behind the wheel, palms on the handles, back flat.",
+        "Roll forward slowly, keeping your hips extended and core braced.",
+        "Go only as far as you can without arching your lower back.",
+        "Pull back to the start using your abs."
+      ]
+    },
+    {
+      "id": "bicycle-crunch",
+      "name": "Bicycle Crunch",
+      "group": "Abs",
+      "subGroup": "Obliques",
+      "howto": [
+        "Lie flat, hands behind your head, knees lifted.",
+        "Bring one elbow toward the opposite knee while extending the other leg.",
+        "Keep your lower back pressed to the floor.",
+        "Alternate sides in a slow, controlled pedaling motion."
+      ]
+    },
+    {
+      "id": "sit-up",
+      "name": "Sit-Up",
+      "group": "Abs",
+      "subGroup": null,
+      "howto": [
+        "Lie on your back, knees bent, feet anchored.",
+        "Place hands across your chest or behind your head.",
+        "Curl up to a full sit-up, keeping your lower back from arching.",
+        "Lower back down with control; breathe out on the way up."
+      ]
+    },
+    {
+      "id": "wrist-curl",
+      "name": "Wrist Curl",
+      "group": "Forearms",
+      "subGroup": "Flexors",
+      "howto": [
+        "Sit with forearms on your thighs, palms up, bar in hands.",
+        "Allow your wrists to extend slightly down.",
+        "Curl the bar up using only your wrists.",
+        "Lower slowly under control."
+      ]
+    },
+    {
+      "id": "reverse-wrist-curl",
+      "name": "Reverse Wrist Curl",
+      "group": "Forearms",
+      "subGroup": "Extensors",
+      "howto": [
+        "Sit with forearms on your thighs, palms facing down, bar in hands.",
+        "Let your wrists drop slightly to a relaxed position.",
+        "Raise the backs of your hands up as high as possible.",
+        "Lower slowly under control."
+      ]
+    },
+    {
+      "id": "reverse-curl",
+      "name": "Reverse Curl",
+      "group": "Forearms",
+      "subGroup": "Extensors",
+      "howto": [
+        "Grip the bar overhand (palms down), hands about shoulder-width.",
+        "Curl the bar up toward your shoulders, elbows pinned.",
+        "Keep the overhand grip throughout.",
+        "Lower slowly; don't use momentum."
+      ]
+    },
+    {
+      "id": "farmers-carry",
+      "name": "Farmer's Carry",
+      "group": "Forearms",
+      "subGroup": null,
+      "howto": [
+        "Pick up a heavy weight in each hand; stand tall.",
+        "Keep shoulders back and core braced.",
+        "Walk with short, steady steps.",
+        "Keep the wait in place; don't let your torso lean."
+      ]
+    },
+    {
+      "id": "wrist-roller",
+      "name": "Wrist Roller",
+      "group": "Forearms",
+      "subGroup": null,
+      "howto": [
+        "Hold the roller with both hands at chest height, arms extended.",
+        "Wind the weight up by rolling your wrists.",
+        "Keep the movement slow and controlled.",
+        "Unwind slowly back down without letting it crash."
+      ]
+    }
   ]
 }

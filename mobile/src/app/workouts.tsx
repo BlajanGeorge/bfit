@@ -3,6 +3,7 @@ import { useFocusEffect, useRouter } from 'expo-router'
 import { useCallback, useState } from 'react'
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
+import { ExerciseThumb } from '@/components/ExerciseThumb'
 import { Button, Card } from '@/components/ui/Button'
 import { Icon } from '@/components/ui/Icon'
 import { Screen } from '@/components/ui/Screen'
@@ -73,6 +74,13 @@ export default function Workouts() {
                   </TouchableOpacity>
                 </View>
               </View>
+              {t.exercises.length > 0 && (
+                <View style={styles.thumbs}>
+                  {t.exercises.map((e, i) => (
+                    <ExerciseThumb key={i} exerciseId={e.exerciseId} size={40} />
+                  ))}
+                </View>
+              )}
               <Text style={{ color: c.textSecondary, fontSize: 13, marginTop: 4 }}>
                 {t.exercises.map((e) => exerciseName(e.exerciseId)).join(' · ') || 'No exercises'}
               </Text>
@@ -88,5 +96,6 @@ const styles = StyleSheet.create({
   head: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   name: { fontSize: 17, fontWeight: '700', flex: 1 },
   actions: { flexDirection: 'row', gap: Spacing.one },
+  thumbs: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.one, marginTop: Spacing.two },
   act: { padding: Spacing.one },
 })

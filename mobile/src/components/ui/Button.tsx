@@ -66,5 +66,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: Spacing.three,
     borderWidth: StyleSheet.hairlineWidth,
+    overflow: 'hidden',
   },
 })

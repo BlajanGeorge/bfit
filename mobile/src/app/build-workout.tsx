@@ -3,6 +3,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router'
 import { useEffect, useState } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
+import { ExerciseThumb } from '@/components/ExerciseThumb'
 import { Button, Card } from '@/components/ui/Button'
 import { Icon } from '@/components/ui/Icon'
 import { Screen } from '@/components/ui/Screen'
@@ -94,13 +95,16 @@ export default function BuildWorkout() {
           {exercises.map((we, i) => (
             <Card key={i} style={styles.exCard}>
               <TouchableOpacity
-                style={{ flex: 1 }}
+                style={styles.exBody}
                 onPress={() => router.push({ pathname: '/configure-exercise', params: { exerciseId: we.exerciseId, index: String(i) } })}>
-                <Text style={[styles.exName, { color: c.text }]}>{exerciseName(we.exerciseId)}</Text>
-                <Text style={{ color: c.textSecondary, fontSize: 13, marginTop: 2 }}>
-                  {groupOf(we.exerciseId)} · {we.sets.length} sets ·{' '}
-                  {we.sets.map((s) => `${s.reps}×${s.weightKg}kg`).join(', ')}
-                </Text>
+                <ExerciseThumb exerciseId={we.exerciseId} size={48} />
+                <View style={{ flex: 1 }}>
+                  <Text style={[styles.exName, { color: c.text }]}>{exerciseName(we.exerciseId)}</Text>
+                  <Text style={{ color: c.textSecondary, fontSize: 13, marginTop: 2 }}>
+                    {groupOf(we.exerciseId)} · {we.sets.length} sets ·{' '}
+                    {we.sets.map((s) => `${s.reps}×${s.weightKg}kg`).join(', ')}
+                  </Text>
+                </View>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => removeExercise(i)} style={styles.trash}>
                 <Icon name="trash" color={c.danger} size={18} />
@@ -128,6 +132,7 @@ const styles = StyleSheet.create({
   label: { fontSize: 13, fontWeight: '600', marginBottom: 6 },
   input: { minHeight: 50, borderRadius: 12, borderWidth: StyleSheet.hairlineWidth, paddingHorizontal: Spacing.three, fontSize: 16 },
   exCard: { flexDirection: 'row', alignItems: 'center' },
+  exBody: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: Spacing.three },
   exName: { fontSize: 16, fontWeight: '700' },
   trash: { padding: Spacing.two, marginLeft: Spacing.two },
 })

@@ -33,10 +33,11 @@ transparent background, single figure, no text, no labels, no arrows, no border,
 
 ### Status
 
-Group cards live in `assets/muscles/<group>.png`. **11/11 done** — chest, back,
-shoulders, biceps, triceps, quadriceps, hamstrings, glutes, calves, abs, forearms.
+Group cards live in `assets/muscles/<group>.png`. **10/10 done** — chest, back,
+shoulders, biceps, triceps, quadriceps, hamstrings, glutes, calves, abs
+(forearms removed from the app).
 
-### Group-level cards to generate (11)
+### Group-level cards to generate (10)
 
 | Group | VIEW | MUSCLE (highlight) |
 |-------|------|--------------------|
@@ -50,12 +51,11 @@ shoulders, biceps, triceps, quadriceps, hamstrings, glutes, calves, abs, forearm
 | Glutes | back | gluteal muscles (buttocks) |
 | Calves | back | calf muscles (lower legs) |
 | Abs | front | abdominal muscles (core) |
-| Forearms | front | forearm muscles |
 
 ### Sub-group cards
 
 **Not needed.** Selecting a group goes straight to its exercises — there are no
-sub-group screens, so only the 11 group cards above are required.
+sub-group screens, so only the 10 group cards above are required.
 
 Later we'll also need **animations** (per exercise `id`) showing how each exercise
 is performed — separate pass.

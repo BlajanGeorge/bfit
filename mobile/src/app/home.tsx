@@ -4,6 +4,7 @@ import { useFocusEffect, useRouter } from 'expo-router'
 import { useCallback, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
+import { ExerciseThumb } from '@/components/ExerciseThumb'
 import { WeekBar } from '@/components/WeekBar'
 import { Button, Card } from '@/components/ui/Button'
 import { Icon } from '@/components/ui/Icon'
@@ -110,6 +111,7 @@ export default function Home() {
                 <TouchableOpacity key={i} activeOpacity={0.9} onPress={() => toggle(i)}>
                   <Card>
                     <View style={styles.exRow}>
+                      <ExerciseThumb exerciseId={we.exerciseId} size={48} />
                       <View style={{ flex: 1 }}>
                         <Text style={[styles.exName, { color: c.text }]}>{exerciseName(we.exerciseId)}</Text>
                         <Text style={{ color: c.textSecondary, marginTop: 2, fontSize: 13 }}>
@@ -153,7 +155,7 @@ const styles = StyleSheet.create({
   nudge: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two, marginTop: Spacing.three },
   empty: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: Spacing.two, paddingHorizontal: Spacing.four },
   emptyText: { fontSize: 16, textAlign: 'center' },
-  exRow: { flexDirection: 'row', alignItems: 'center' },
+  exRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three },
   exName: { fontSize: 16, fontWeight: '700' },
   setRow: { flexDirection: 'row', alignItems: 'center', paddingTop: 6, borderTopWidth: StyleSheet.hairlineWidth },
 })

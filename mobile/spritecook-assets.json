@@ -1,0 +1,791 @@
+{
+  "back-extension": {
+    "animation": {
+      "asset_id": "aa7a2d5c-62d8-4f98-8120-3cc0456dd7a2",
+      "removebg": "Pro",
+      "sha12": "1d6f9db47d6e"
+    },
+    "start": {
+      "asset_id": "5d6b07d2-379b-4b5f-8888-c957cb105736",
+      "sha12": "58a555240fea"
+    }
+  },
+  "back-squat": {
+    "animation": {
+      "asset_id": "5086af36-9db6-444f-90d1-c1403d6584c4",
+      "sha12": "6f15361898d5"
+    },
+    "mid": {
+      "asset_id": "23eed29e-98b5-4fd0-ba84-37185fb66ba4",
+      "note": "deep squat, three-quarter view - view differs from the start so the figure rotates during the rep"
+    },
+    "rejected_animation": {
+      "asset_id": "dba5bad8-fdbf-4963-bd73-55fca2ba38ff",
+      "note": "rejected: figure zooms in and out; the two keyframes were drawn at different views and scales",
+      "removebg": "Pro (UI)"
+    },
+    "start": {
+      "asset_id": "23eed29e-98b5-4fd0-ba84-37185fb66ba4",
+      "sha12": "82e742927e6a"
+    }
+  },
+  "barbell-curl": {
+    "animation": {
+      "asset_id": "a1fe1aa0-a70c-4987-97aa-a47d4da9bd99",
+      "note": "3 keyframes in UI; stabilized only (feet-aligned, 58px x shift), no freeze, lossless",
+      "sha12": "21ca06b3d896"
+    },
+    "animation_side_old": {
+      "asset_id": "f0f9f274-d917-40bc-8889-c3e707dcc2af"
+    },
+    "mid": {
+      "asset_id": "abffdd9a-0251-4e45-8f25-d6f73374dbc9",
+      "note": "top position, 45deg 3/4 view; start c8c1e400 generated from it as reference"
+    },
+    "start": {
+      "asset_id": "c8c1e400-03b2-43af-a9c8-f47d927d73c0",
+      "sha12": "85001aec56a7"
+    },
+    "start_front_old": {
+      "asset_id": "37531226-36d0-472e-8686-f6f6760c91e8",
+      "sha12": "7d37fad39c84"
+    }
+  },
+  "bench-press": {
+    "animation": {
+      "asset_id": "fa338a7e-f8b3-4dcc-a318-cbeb8d155ede",
+      "sha12": "9b104c019e6b"
+    }
+  },
+  "bent-over-row": {
+    "animation": {
+      "asset_id": "4d63b9ec-7313-4323-80d2-a1068695a375",
+      "removebg": "Pro",
+      "sha12": "10112de9ede2"
+    },
+    "start": {
+      "asset_id": "898dbfb6-0738-4d87-8a52-bc34374ad98d",
+      "sha12": "371e68fc9986"
+    }
+  },
+  "bulgarian-split-squat": {
+    "animation": {
+      "asset_id": "8a90576d",
+      "sha12": "ac6ac8b3e24f"
+    },
+    "start": {
+      "asset_id": "2da72413",
+      "sha12": "9a46f8ffea4f"
+    }
+  },
+  "cable-crossover": {
+    "animation": {
+      "asset_id": "6cbb7195-4b20-4022-adc4-a62521b8f6b6",
+      "sha12": "64d0b9d3d9ff"
+    },
+    "mid": {
+      "asset_id": "d5cd9774-2b72-41b1-85ba-45f8a9b43bad"
+    },
+    "mid_nostack": {
+      "asset_id": "314e19ac-59a7-49d3-b0ec-d45a750551a5",
+      "note": "right stack painted out, left cover untouched"
+    },
+    "start": {
+      "asset_id": "58735dac-e4da-4e7b-aa5a-390c2f500c7d",
+      "sha12": "9e94b230f841"
+    }
+  },
+  "cable-curl": {
+    "animation": {
+      "asset_id": "c99a9660-fa2d-450f-973a-2e11ce54662d",
+      "note": "keyframes 1=08593494 8=1585c3ed 16=08593494; stabilized (shift + scale-normalised, frame 7 was 1.3% larger); frames 6 and 12 dropped (ghost bar); 14 frames @143ms, lossless",
+      "sha12": "8e7749c3cb42"
+    },
+    "mid": {
+      "asset_id": "1585c3ed-0c88-4678-a757-8e30eb8602ce",
+      "note": "top position; start 08593494 generated from it as reference"
+    },
+    "start": {
+      "asset_id": "08593494-3de9-40f4-bc9d-a23f9a78ec1f",
+      "sha12": "77d7e1b69720"
+    }
+  },
+  "cable-lateral-raise": {
+    "animation": {
+      "asset_id": "cff61160-e5ea-44c4-8a40-181d461d6cf6",
+      "removebg": "Pro",
+      "sha12": "2cdf620af0a6"
+    },
+    "rejected_start": {
+      "asset_id": "1fbada02-6cd2-47b2-8190-e70e8b29e4f9",
+      "note": "handle in the hand nearest the post"
+    },
+    "start": {
+      "asset_id": "6bc32f26-5b2a-4911-9028-f3c5af3f8696",
+      "sha12": "596ea6285e75"
+    }
+  },
+  "chest-dip": {
+    "animation": {
+      "asset_id": "3733c51e-92f2-48c9-9a65-9fe7a9e898ac",
+      "removebg": "Pro (UI, in place)",
+      "sha12": "50de58b1f372"
+    },
+    "start": {
+      "asset_id": "a76ee3e2-1b15-4a0e-9b0f-17537d5cd68a",
+      "sha12": "af664880f15d"
+    }
+  },
+  "chin-up": {
+    "animation": {
+      "asset_id": "19a88e1d-9b2b-4968-8a20-6976ad3ad719",
+      "model": "pixel-engine-v1.5",
+      "removebg": "Pro",
+      "sha12": "f536731fcc0f"
+    },
+    "note": "v1.5 from headroom ref c5dff7e5; head clears the bar",
+    "reference": {
+      "asset_id": "1a694985-b83a-43b7-a8ca-6d33349f6d56",
+      "note": "TOP position canvas with room below (from 1dc56442)"
+    },
+    "rejected_v3": {
+      "asset_id": "73f541fc-8fa3-4306-810f-50318a975494"
+    },
+    "start": {
+      "asset_id": "8a814c6c-98f9-4a61-86fd-a95f45dfdd9c",
+      "sha12": "e5121bc94f3b"
+    }
+  },
+  "close-grip-bench": {
+    "animation": {
+      "asset_id": "d17bbc40-26fa-4468-8d3a-85a56cedc1c6",
+      "note": "square keyframes; aligned with anim-stabilize-shift.py then anim-freeze-hard.py (one global motion zone, frame-1 pixels everywhere else) - no pulsing, depth kept as drawn; lossless",
+      "sha12": "340c47dddc26"
+    },
+    "keyframes_square": {
+      "mid": "1584c20d-962c-484d-823a-f25f4a5752e7",
+      "start": "4c2cf6eb-0b29-44e1-96f1-d29c78b6f322"
+    },
+    "mid": {
+      "asset_id": "d25278f7-a240-43ea-8b80-02742df8383d",
+      "note": "lockout"
+    },
+    "start": {
+      "asset_id": "fb7f430b-5f3c-454a-a621-72d4e351e35a",
+      "note": "bar on lower chest, edit of the mid"
+    }
+  },
+  "concentration-curl": {
+    "animation": {
+      "asset_id": "4c42341e-7920-4940-8f0a-c8859461cb7e",
+      "note": "keyframes 1=0e1c5c9a 8=7cb82a96 16=0e1c5c9a; stabilized only (41px x / 13px y), no freeze, lossless",
+      "removebg": "Pro (UI)",
+      "sha12": "d1c2e83aa757"
+    },
+    "mid": {
+      "asset_id": "7cb82a96-4ec3-409b-bedb-5fca9bda9fa1",
+      "note": "top position; start 0e1c5c9a generated from it as reference"
+    },
+    "start": {
+      "asset_id": "0e1c5c9a-d7be-481b-ac1f-41eb2ad92a12",
+      "sha12": "85e1dde80052"
+    }
+  },
+  "crunch": {
+    "animation": {
+      "asset_id": "bb7280aa-489f-4ca7-9b69-e42fd7ff6eea",
+      "sha12": "332bf4bb67bc"
+    },
+    "start": {
+      "asset_id": "7cd68f83-a119-4cc8-b745-e2717e39fc48",
+      "sha12": "4a786819a318"
+    }
+  },
+  "db-bench-press": {
+    "animation": {
+      "asset_id": "d16828f8-8531-445b-8024-2ac41cd77277",
+      "sha12": "0502cd8fdb5d"
+    },
+    "start": {
+      "asset_id": "53661d71-822e-42b2-a87f-0cfb05f4c7f0",
+      "sha12": "bbf43d37e310"
+    }
+  },
+  "db-curl": {
+    "animation": {
+      "asset_id": "9802214a-9a3d-4a7f-ba39-e10e22352df5",
+      "note": "3 keyframes in UI; installed as downloaded (no stabilize/freeze), lossless",
+      "sha12": "97dcaa123c65"
+    },
+    "start": {
+      "asset_id": "432debd6-d71b-4743-815a-87f9c435fc13",
+      "sha12": "f29d534c1a48"
+    }
+  },
+  "db-fly": {
+    "animation": {
+      "asset_id": "fccee00b-708c-4191-b0f5-85fe11c142b1",
+      "sha12": "fd293e1f48b6"
+    },
+    "start": {
+      "asset_id": "1676ec17-6dd6-4431-a6d5-4cc6a1fbd372",
+      "sha12": "fb66ab1cbd36"
+    }
+  },
+  "db-row": {
+    "animation": {
+      "asset_id": "ee1d961c-11c4-4144-bf56-4dac8cae71ee",
+      "removebg": "Pro",
+      "sha12": "a4dc0bebae55"
+    },
+    "start": {
+      "asset_id": "c1a4fad1-b035-469a-ab06-83abbf557f65",
+      "sha12": "4581bebf7b06"
+    }
+  },
+  "db-shoulder-press": {
+    "animation": {
+      "asset_id": "225edc36-2bf2-45e2-b087-4bb4da80ba5f",
+      "removebg": "Pro (UI)",
+      "sha12": "e958f00d5960"
+    },
+    "reference": {
+      "asset_id": "770316c6-85bf-492d-84ff-f9ab776369c6",
+      "note": "headroom canvas, top 0.38"
+    },
+    "start": {
+      "asset_id": "a5730d5d-1345-4092-9cee-405d88cee7e6",
+      "sha12": "efc66c180232"
+    }
+  },
+  "deadlift": {
+    "animation": {
+      "asset_id": "75410c3a-4fce-5b64-845e-05df0ae00500",
+      "sha12": "7d9af2363611"
+    },
+    "animation_raw": {
+      "asset_id": "bd96170c-d984-4094-b0dc-a3144b3f0443"
+    },
+    "reference": {
+      "asset_id": "b8c517fa-c748-49af-bcc4-866def585cb0",
+      "note": "headroom canvas, top 0.40"
+    },
+    "start": {
+      "asset_id": "fdf90b6d-3fa5-4d64-9711-9db35c3a1a4c",
+      "sha12": "17e0f6a549ee"
+    }
+  },
+  "decline-bench-press": {
+    "animation": {
+      "asset_id": "ad95bd70-9334-4d1c-8141-0e196d7e0626",
+      "sha12": "021e192e43e4"
+    },
+    "start": {
+      "asset_id": "ea163a56-4a1d-47b8-88d0-01877f576883",
+      "sha12": "247aa87dbeb2"
+    }
+  },
+  "face-pull": {
+    "animation": {
+      "asset_id": "ce55d307-5c84-4e86-9213-ea49dbd9fd86",
+      "removebg": "Pro",
+      "sha12": "b3cabc4aacad"
+    },
+    "start": {
+      "asset_id": "2f01fa3f-071e-42eb-80d6-46d467cf52dc",
+      "sha12": "49b419d7a773"
+    }
+  },
+  "front-raise": {
+    "animation": {
+      "asset_id": "25ee4e46-18cb-491b-8bda-4c0ccfa68be6",
+      "removebg": "Pro",
+      "sha12": "bbba906f16ec"
+    },
+    "start": {
+      "asset_id": "b78a1e3a-d752-49e9-ad02-41da63ac329b",
+      "sha12": "5f3000d0fc68"
+    }
+  },
+  "hack-squat": {
+    "animation": {
+      "asset_id": "1332879c-e99e-4f02-9138-339d7869772b",
+      "sha12": "9bff22cab8ba"
+    },
+    "start": {
+      "asset_id": "a4ac9dda-245a-4e58-ad45-fc2beeed3886",
+      "sha12": "5fbddf13c873"
+    }
+  },
+  "hammer-curl": {
+    "animation": {
+      "asset_id": "fc20590d-c388-4ed9-a0b9-ef0834ef94a2",
+      "note": "3 keyframes in UI; installed as downloaded (no stabilize/freeze), lossless",
+      "sha12": "7bf895d56c59"
+    },
+    "mid": {
+      "asset_id": "135b1dcd-c013-4275-adff-9ee2b3b250c1",
+      "note": "elbows 90 deg, neutral grip, 3/4 view; start 0e3c1f21 generated from it as reference"
+    },
+    "start": {
+      "asset_id": "0e3c1f21-1616-4203-b0b9-c3dc0a7928f5",
+      "sha12": "9cc6210d5d09"
+    },
+    "start_old": {
+      "asset_id": "e79da31c-1660-4a00-a59a-729c8e9ce3f1"
+    }
+  },
+  "hanging-leg-raise": {
+    "animation": {
+      "asset_id": "8cbf0e27-57f3-4841-afe7-18c22a77eb63",
+      "sha12": "4234fe4ac429"
+    },
+    "start": {
+      "asset_id": "8cbf0e27-57f3-4841-afe7-18c22a77eb63",
+      "sha12": "b41e78a5f2fb"
+    }
+  },
+  "hip-thrust": {
+    "animation": {
+      "asset_id": "854cc759-82a2-48a8-a926-d495087b750f",
+      "sha12": "055c5afed4a1"
+    },
+    "start": {
+      "asset_id": "2b1bc7f9-7c8c-4305-b3f0-772507c55ccb",
+      "sha12": "322564f8b9bb"
+    }
+  },
+  "incline-db-curl": {
+    "animation": {
+      "asset_id": "545e0195-3ddf-464f-afcd-9582fd3ecfa3",
+      "note": "3 keyframes in UI; stabilized only (feet-aligned, 53px x / 10px y shift), no freeze, lossless",
+      "sha12": "0a200cc5a159"
+    },
+    "mid": {
+      "asset_id": "78884dd1-85b3-49fb-ad8f-f353848178bc",
+      "note": "top position; start 16e2263d generated from it as reference"
+    },
+    "rejected_start": {
+      "asset_id": "24793330-f55f-4b2b-883f-2a4c37164641",
+      "note": "mirrored"
+    },
+    "start": {
+      "asset_id": "16e2263d-5078-452a-9b36-0077f39d6cc5",
+      "sha12": "408bc7b38284"
+    }
+  },
+  "incline-db-fly": {
+    "animation": {
+      "asset_id": "6bdf2ed9-4526-4077-af3b-7d193eeb6b92",
+      "sha12": "cc270841e7d4"
+    },
+    "start": {
+      "asset_id": "e30621fb-cdb2-4309-8685-3a18f46802b0",
+      "sha12": "735c610832c9"
+    }
+  },
+  "incline-db-press": {
+    "animation": {
+      "asset_id": "f02e87b7-62db-4fa9-8d8b-77f0765c576d",
+      "sha12": "9c5946e4bb48"
+    }
+  },
+  "lat-pulldown": {
+    "animation": {
+      "asset_id": "7972cc1f-d0a2-41de-ae7f-188881fbd2e3",
+      "removebg": "Pro (UI, in place)",
+      "sha12": "c5d437c16384"
+    },
+    "start": {
+      "asset_id": "e0416028-a0dd-47fb-8f5d-44fd6891989d",
+      "sha12": "6cebaebca29b"
+    }
+  },
+  "lateral-raise": {
+    "animation": {
+      "asset_id": "b801b0f3-8e1f-4944-a933-4397872cad2b",
+      "removebg": "Pro (UI)",
+      "sha12": "8c0715378cb2"
+    },
+    "start": {
+      "asset_id": "0b105755-a392-4a8e-a0ca-7ed8705d3668",
+      "sha12": "ee1fab16b5bd"
+    }
+  },
+  "leg-extension": {
+    "animation": {
+      "asset_id": "ef1121f0-e7c1-415e-9cd2-8550462d641f",
+      "sha12": "a2014583c824"
+    },
+    "start": {
+      "asset_id": "843f1d0a-e0f1-4215-9539-cd681ea5f3cd",
+      "sha12": "8fb7010c4402"
+    }
+  },
+  "leg-press": {
+    "animation": {
+      "asset_id": "8bf4ae1d-1fb0-49b4-a94e-621e01be4a97",
+      "note": "3 keyframes in UI | thin gap between the rails flickered on/off, made permanently filled with anim-deflicker.py",
+      "sha12": "e3eb1a344d7f"
+    },
+    "start": {
+      "asset_id": "eaf819e9-8198-4988-967d-d6a1559981a1",
+      "sha12": "5f2723b7260d"
+    }
+  },
+  "leg-press-calf-raise": {
+    "animation": {
+      "asset_id": "dcfe49fe-9e1f-478c-90b4-57f574cb191d",
+      "sha12": "10f70dfdc3d3"
+    },
+    "start": {
+      "asset_id": "14f8bc69-4e7d-4b62-b15f-81fed0d0c863",
+      "sha12": "ed494e01d99b"
+    }
+  },
+  "lying-leg-curl": {
+    "animation": {
+      "asset_id": "00f50abd-5ef9-4a7a-9181-54a4cb3471be",
+      "sha12": "4cc07561bea6"
+    },
+    "start": {
+      "asset_id": "00f50abd-5ef9-4a7a-9181-54a4cb3471be",
+      "sha12": "e90329b94776"
+    }
+  },
+  "machine-chest-press": {
+    "animation": {
+      "asset_id": "40082cbf-61a5-4db2-8800-db2888f40e86",
+      "sha12": "e40d1d71c11f"
+    },
+    "reference": {
+      "asset_id": "a43d9201-cff6-4d4b-b913-b72c7482ea7a",
+      "note": "80% scale, right-aligned for front room"
+    },
+    "start": {
+      "asset_id": "885d3e07-bb89-4774-afe0-570d6f6c2429",
+      "sha12": "a5d565b629a6"
+    }
+  },
+  "machine-kickback": {
+    "animation": {
+      "asset_id": "976724b8-ad4c-4ad0-b511-060b1f72739e",
+      "note": "v3 (976724b8) de-zoomed locally (area-normalised scale, anchored on the standing foot)",
+      "sha12": "1e2ffe86b1fa"
+    },
+    "start": {
+      "asset_id": "83d22c4e-8ff1-4003-b500-c0aba7e86a70",
+      "sha12": "f6b9edf217dd"
+    }
+  },
+  "machine-shoulder-press": {
+    "animation": {
+      "asset_id": "76fd4a46-9cd3-486e-82ff-5e3e32eb477b",
+      "removebg": "Pro (UI)",
+      "sha12": "c97c6101c14b"
+    },
+    "start": {
+      "asset_id": "baf959f8-63b7-4d89-ad48-1b70ee022191",
+      "sha12": "1382640345d5"
+    }
+  },
+  "overhead-press": {
+    "animation": {
+      "asset_id": "d8703aa7-ad6c-4db9-8c34-7bad99dcdede",
+      "removebg": "Pro (UI)",
+      "sha12": "85ee9ef5260b"
+    },
+    "reference": {
+      "asset_id": "b66a0520-cdcb-4155-af84-b0a9495680b6",
+      "note": "headroom canvas, top 0.38"
+    },
+    "rejected_start_v2": {
+      "asset_id": "74c6c7ca-52c0-4f0d-98cd-620875c0c617",
+      "note": "shrug pose"
+    },
+    "start": {
+      "asset_id": "a524dbd8-ad53-4bb0-8493-b0e7dfbd7df5",
+      "sha12": "ca8d69209a82"
+    }
+  },
+  "overhead-triceps-ext": {
+    "animation": {
+      "asset_id": "bd2ba44a-d37d-47d0-8767-e63cc6562f52",
+      "note": "square keyframes; aligned with anim-stabilize-shift.py then anim-freeze-hard.py (one global motion zone, frame-1 pixels everywhere else) - no pulsing, depth kept as drawn; lossless (no drift at all, motion zone only 4%)",
+      "removebg": "Pro (UI)"
+    },
+    "mid": {
+      "asset_id": "cc6b1edc-5c2a-436b-aabc-282014e0ba9c",
+      "note": "arms locked out overhead, square 1024"
+    },
+    "start": {
+      "asset_id": "44ac799a-3e45-4a73-aada-781a3901bca7",
+      "note": "dumbbell behind the head, edit of the mid"
+    }
+  },
+  "pec-deck": {
+    "animation": {
+      "asset_id": "49504bea-f53a-4a06-bc8c-1a001c337d4d",
+      "sha12": "12f0dc43ad19"
+    },
+    "start": {
+      "asset_id": "5c8f06fa-8a81-47af-afa7-1c0af3d3453c",
+      "sha12": "5369f444c0da"
+    },
+    "start_nostack": {
+      "asset_id": "1d234662-53e1-4e46-a190-9e5c4d270c88"
+    }
+  },
+  "plank": {
+    "animation": {
+      "asset_id": "97099526-1252-4653-aa4a-6e171f05b96c",
+      "sha12": "c1bafd27a129"
+    },
+    "start": {
+      "asset_id": "97099526-1252-4653-aa4a-6e171f05b96c",
+      "sha12": "f5ab5b600452"
+    }
+  },
+  "preacher-curl": {
+    "animation": {
+      "asset_id": "caafd914-b42c-4897-bfad-93d826fe4bdf",
+      "note": "3 keyframes in UI; stabilized + anim-freeze.py, lossless (only one George asked to fix)",
+      "removebg": "Pro (UI)",
+      "sha12": "52adc3161e0a"
+    },
+    "mid": {
+      "asset_id": "34995f1e-dba5-47e2-9641-fa37bdb68ab4",
+      "note": "top position; start 0114e3bd generated from it as reference"
+    },
+    "rejected_start": {
+      "asset_id": "d7f13ad6-c853-44e2-a9d1-b5ebdbdb1061",
+      "note": "different angle/bench"
+    },
+    "start": {
+      "asset_id": "0114e3bd-1d48-476b-a304-bf6830ce2e1f",
+      "sha12": "644cc48352e8"
+    }
+  },
+  "pull-up": {
+    "animation": {
+      "asset_id": "3b18be46-ebd7-4748-96a5-3f1e6c01676b",
+      "removebg": "Pro (UI, in place)",
+      "sha12": "dc431d5ed12b"
+    },
+    "start": {
+      "asset_id": "36ad164d-9d15-42fb-a2de-06a6fa4d0d34",
+      "sha12": "3a8411ff3ce2"
+    }
+  },
+  "push-up": {
+    "animation": {
+      "asset_id": "5123fe32-042b-55b1-a1d6-a4969846cee2",
+      "sha12": "da213c26c571"
+    },
+    "animation_raw": {
+      "asset_id": "6b969d7c-9320-4096-844b-d9a850a5afef"
+    },
+    "rejected_pro_rerun": {
+      "asset_id": "a861284f-0e2b-48c0-a984-87f24f9d01af",
+      "note": "Pro re-run changed the motion; installed animation kept"
+    },
+    "start": {
+      "asset_id": "9accb62f-feff-49cc-b8d5-8f835a0b0675",
+      "sha12": "3d30161af322"
+    }
+  },
+  "rear-delt-fly": {
+    "animation": {
+      "asset_id": "deff2a7e-7cbc-4b77-8f10-d1a34a6e49f2",
+      "removebg": "Pro",
+      "sha12": "8b844f0884f8"
+    },
+    "start": {
+      "asset_id": "9eec5d8c-d125-44dc-b8fb-ea19eff5ce6f",
+      "sha12": "15a967b503c2"
+    }
+  },
+  "romanian-deadlift": {
+    "animation": {
+      "asset_id": "09d8b693-ff23-4c5a-854d-467f9798dc94",
+      "sha12": "a82dafd65146"
+    },
+    "start": {
+      "asset_id": "83695f44-717d-4dc5-bf59-ab43344c9bf1",
+      "sha12": "6e68ca69a62e"
+    }
+  },
+  "rope-pushdown": {
+    "animation": {
+      "asset_id": "0aabacf1-796d-4a42-b0d4-c39868d4e97c",
+      "note": "square keyframes; rope artifact in frames 11-13 patched locally from frame 14; lossless",
+      "removebg": "Pro (UI)"
+    },
+    "keyframes_square": {
+      "mid": "bbe0524c-fef1-4770-bbde-2135f76f3fb0",
+      "start": "af0e67f7-040a-4b57-9e75-b29ab7376bf2"
+    },
+    "mid": {
+      "asset_id": "efe6f97f-21a4-4596-8551-cefadf1b54db",
+      "note": "arms extended, rope ends apart"
+    },
+    "start": {
+      "asset_id": "e9e00b6b-7584-4a9c-b906-3bfa24b3794c",
+      "note": "elbows 90 deg, red only on triceps"
+    }
+  },
+  "russian-twist": {
+    "animation": {
+      "asset_id": "ae59da20-e8f7-4466-b33f-b1180735fb52",
+      "sha12": "cc3efff1198e"
+    },
+    "start": {
+      "asset_id": "49f613a5-91d2-4aa3-a892-e6f60dccc5f0",
+      "sha12": "2855c3ef15b6"
+    }
+  },
+  "seated-cable-row": {
+    "animation": {
+      "asset_id": "4f0c7ed8-3219-467c-a814-0a47187ec281",
+      "removebg": "Pro",
+      "sha12": "6b091a0be370"
+    },
+    "start": {
+      "asset_id": "04e1d93b-ece3-4b78-9e01-584a46deeab3",
+      "sha12": "ad173264b437"
+    }
+  },
+  "seated-calf-raise": {
+    "animation": {
+      "asset_id": "cf17249a-a92e-4afe-a4a2-01280c9bb6e0",
+      "sha12": "e8425eddc536"
+    },
+    "start": {
+      "asset_id": "f640ef2f-695d-4f27-b900-6eb0b8c8b3eb",
+      "sha12": "caeeaaf2785d"
+    }
+  },
+  "seated-leg-curl": {
+    "animation": {
+      "asset_id": "7f29e918-68cc-4c97-a51d-fb7a16c510de",
+      "sha12": "4dc2293329ae"
+    },
+    "start": {
+      "asset_id": "08a96ef6-d0be-4244-a01e-2994c221a3d0",
+      "sha12": "5c803877316b"
+    }
+  },
+  "shrug": {
+    "animation": {
+      "asset_id": "2404f449-10e5-4ece-b5ae-e8a0eb5f480e",
+      "removebg": "Pro",
+      "sha12": "7de9bbc00ac2"
+    },
+    "rejected": {
+      "asset_id": "6f3bce10-7795-4445-b0ee-a18c85bc9fc1",
+      "note": "became an upright row"
+    },
+    "start": {
+      "asset_id": "db7a135c-0e9c-456c-b86f-e943fe4c4df5",
+      "sha12": "1ff805e516df"
+    }
+  },
+  "skull-crusher": {
+    "animation": {
+      "asset_id": "da7ec77f-fbd9-4e1f-bec9-4e0b1d0a31e0",
+      "note": "square keyframes; aligned with anim-stabilize-shift.py then anim-freeze-hard.py (one global motion zone, frame-1 pixels everywhere else) - no pulsing, depth kept as drawn; lossless",
+      "sha12": "82e0e271132b"
+    },
+    "keyframes_square": {
+      "mid": "affe1841-89c1-467b-bec1-6c91ff8b1daa",
+      "start": "e10ec3a0-32cc-47ec-b0a1-1855f2007b76"
+    },
+    "mid": {
+      "asset_id": "b7eee70b-580e-42bf-9538-77a89e24fad6",
+      "note": "lockout, arms straight"
+    },
+    "start": {
+      "asset_id": "b5407235-e119-4c03-ab37-7c7d7c9ed5af",
+      "note": "bottom, bar beside the head; edit of the mid, pixel-matched"
+    }
+  },
+  "standing-calf-raise": {
+    "animation": {
+      "asset_id": "65ea6c3a-c562-43f7-88ed-14435597d390",
+      "sha12": "c9a9a2e8328b"
+    },
+    "start": {
+      "asset_id": "8575be7d-b196-4491-a6c7-92a33e599000",
+      "sha12": "d18493c71935"
+    }
+  },
+  "straight-arm-pulldown": {
+    "animation": {
+      "asset_id": "e75b09c7-cfc0-43b5-9b17-a000c42443e8",
+      "model": "pixel-engine-v1.5",
+      "removebg": "Pro",
+      "sha12": "126146d8813c"
+    },
+    "rejected_anim_v3": {
+      "asset_id": "de503468-c620-4f65-bc61-3b5ba965d241",
+      "note": "elbows bend into a row"
+    },
+    "rejected_start_v2": {
+      "asset_id": "815e0b89-ea04-4a5c-b99b-b506c56b9ec3",
+      "note": "still upright"
+    },
+    "start": {
+      "asset_id": "92238d30-aab1-4b03-9b09-768d689f70ab",
+      "sha12": "a842a022455d"
+    }
+  },
+  "sumo-deadlift": {
+    "animation": {
+      "asset_id": "01b1e3eb-2212-4ecd-9438-3cfba227d226",
+      "sha12": "70f67e34005b"
+    },
+    "start": {
+      "asset_id": "01b1e3eb-2212-4ecd-9438-3cfba227d226",
+      "sha12": "bd85fa0827c7"
+    }
+  },
+  "triceps-dip": {
+    "animation": {
+      "asset_id": "63db5be2-f92b-4093-8acb-3ea48f6f68bf",
+      "model": "pixel-engine-v1.5",
+      "note": "animated from the top pose via MCP; body lowers 120px; installed as downloaded, lossless",
+      "removebg": "Pro (API)",
+      "sha12": "2e0a0773dcb7"
+    },
+    "note": "start = top (locked out); Gemini refused to lower the body in 3 attempts (9927d2f0, 030f0365, 73a78795); animated from the top with v1.5",
+    "start": {
+      "asset_id": "6eb9f429-b5bc-4690-8fa6-58a895dbc435",
+      "sha12": "f8e0c92d26aa"
+    }
+  },
+  "triceps-pushdown": {
+    "animation": {
+      "asset_id": "4ed045b8",
+      "sha12": "8dd638845187"
+    },
+    "mid": {
+      "asset_id": "d9a6d2bf-beb2-490a-81b8-9740f557caff",
+      "note": "peak position; start generated from it"
+    },
+    "start": {
+      "asset_id": "ea92ab45",
+      "sha12": "a9650551f6f3"
+    }
+  },
+  "upright-row": {
+    "animation": {
+      "asset_id": "56501555-aa23-4e0a-8a77-85160c3e6a1c",
+      "note": "3 keyframes in UI; installed as downloaded (no stabilize/freeze), lossless",
+      "sha12": "fc12e546d32d"
+    },
+    "start": {
+      "asset_id": "161623f9-6f4c-425d-994a-451b21fb5fd0",
+      "sha12": "1f3b70c2099c"
+    }
+  }
+}

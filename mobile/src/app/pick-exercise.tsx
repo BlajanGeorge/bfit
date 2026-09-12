@@ -2,6 +2,7 @@
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
+import { ExerciseThumb } from '@/components/ExerciseThumb'
 import { Icon } from '@/components/ui/Icon'
 import { Screen } from '@/components/ui/Screen'
 import { Spacing } from '@/constants/theme'
@@ -30,6 +31,7 @@ export default function PickExercise() {
             activeOpacity={0.85}
             onPress={() => onPick(e.id)}
             style={[styles.row, { backgroundColor: c.backgroundElement, borderColor: c.border }]}>
+            <ExerciseThumb exerciseId={e.id} />
             <View style={{ flex: 1 }}>
               <Text style={[styles.name, { color: c.text }]}>{e.name}</Text>
               {e.subGroup ? (
@@ -48,6 +50,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: Spacing.three,
     padding: Spacing.three,
     borderRadius: 12,
     borderWidth: StyleSheet.hairlineWidth,
