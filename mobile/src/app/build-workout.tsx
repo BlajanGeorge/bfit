@@ -57,7 +57,7 @@ export default function BuildWorkout() {
     }
   }
 
-  const title = isTemplate ? 'New template' : 'Build workout'
+  const title = isTemplate ? (templateId ? 'Edit template' : 'New template') : 'Build workout'
 
   return (
     <Screen
