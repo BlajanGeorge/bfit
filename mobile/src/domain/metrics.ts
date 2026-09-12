@@ -251,3 +251,37 @@ export function bodyMetricSeries(
       value: e[field] as number,
     }))
 }
+
+/** Y-axis window for a body-metric chart: the axis starts just below the
+ *  smallest value and ends just above the largest, on "nice" steps, so a
+ *  2 kg change is readable instead of being flattened onto a 0-based axis. */
+export interface AxisRange {
+  min: number
+  max: number
+  sections: number
+  labels: string[]
+}
+
+export function niceRange(values: number[]): AxisRange {
+  if (values.length === 0) return { min: 0, max: 4, sections: 4, labels: ['0', '1', '2', '3', '4'] }
+  const lo = Math.min(...values)
+  const hi = Math.max(...values)
+  const span = Math.max(hi - lo, 1e-9)
+  const pad = span === 1e-9 ? 1 : span * 0.25
+  const rough = (span + 2 * pad) / 5
+  const pow = 10 ** Math.floor(Math.log10(rough))
+  const step = [1, 2, 2.5, 5, 10].map((m) => m * pow).find((st) => st >= rough) ?? 10 * pow
+  let min = Math.floor((lo - pad) / step) * step
+  // body metrics are never negative: a big jump (say 10 -> 80 cm) must not
+  // push the axis below zero just to keep the padding symmetric
+  if (lo >= 0 && min < 0) min = 0
+  let max = Math.ceil((hi + pad) / step) * step
+  if (max <= min) max = min + step * 4
+  const sections = Math.round((max - min) / step)
+  const decimals = step < 1 ? 1 : 0
+  const labels = Array.from({ length: sections + 1 }, (_, i) => (min + i * step).toFixed(decimals))
+  // avoid float noise on the boundaries themselves
+  min = Number(min.toFixed(decimals))
+  max = Number(max.toFixed(decimals))
+  return { min, max, sections, labels }
+}

@@ -23,8 +23,10 @@ import { MUSCLE_GROUPS, groupOf } from '@/data/catalog'
 import { getAllWorkouts, getBodyEntries } from '@/data/repo'
 import { BODY_MEASURES, type BodyEntry, type MuscleGroup, type Workout } from '@/domain/types'
 import {
+  type AxisRange,
   bodyMetricSeries,
   bodyweightSeries,
+  niceRange,
   dailyMaxWeightSeries,
   maxWeight,
   repsThisWeek,
@@ -395,7 +397,8 @@ function LinePanel({
   onExpand: () => void
 }) {
   const [tip, pickTip] = useTip()
-  const data = tipData(series, tip, unit, c)
+  const range = useMemo(() => niceRange(series.map((p) => p.value)), [series])
+  const data = tipData(series, tip, unit, c, range)
   // Fixed 7-day viewport: spread points across 7 slots, leaving room
   // (initialSpacing + endSpacing) so the last label is never truncated.
   const slots = 7
@@ -440,6 +443,10 @@ function LinePanel({
           xAxisLabelTextStyle={axisText}
           yAxisTextStyle={axisText}
           curved
+          yAxisOffset={range.min}
+          maxValue={range.max - range.min}
+          noOfSections={range.sections}
+          yAxisLabelTexts={range.labels}
           {...tipTargets(series, pickTip)}
         />
       )}
@@ -485,13 +492,12 @@ const TIP_W = 120
 // the line. It is clipped at the chart's edges, so it goes below the point for high
 // values (the usual case, the y axis starts at 0), above it for low ones, and is
 // nudged inwards on the first and last points.
-const tipData = (series: Point[], tip: number | null, unit: string, c: ReturnType<typeof useTheme>) => {
-  const max = Math.max(1, ...series.map((p) => p.value))
+const tipData = (series: Point[], tip: number | null, unit: string, c: ReturnType<typeof useTheme>, range: AxisRange) => {
   const last = series.length - 1
   return series.map((p, i) => ({
     value: p.value,
     label: p.label,
-    dataPointLabelShiftY: p.value / max < 0.35 ? -58 : 14,
+    dataPointLabelShiftY: (p.value - range.min) / (range.max - range.min) < 0.35 ? -58 : 14,
     dataPointLabelShiftX: i === 0 ? 40 : i === last ? -40 : 0,
     dataPointLabelComponent: () =>
       tip === i ? <ChartTip lines={[p.label, `${p.value} ${unit}`]} c={c} /> : null,
@@ -567,6 +573,10 @@ function ExpandedChartOverlay({
   const insets = useSafeAreaInsets()
   const { width } = useWindowDimensions()
   const [tip, pickTip] = useTip()
+  const lineRange = useMemo(
+    () => niceRange(chart?.kind === 'line' ? chart.data.map((p) => p.value) : []),
+    [chart],
+  )
 
   const chartW = width - Spacing.three * 2
   const axisText = { color: c.textSecondary, fontSize: 11 }
@@ -603,7 +613,7 @@ function ExpandedChartOverlay({
               <Empty c={c} />
             ) : (
               <LineChart
-                data={tipData(chart.data, tip, chart.unit, c)}
+                data={tipData(chart.data, tip, chart.unit, c, lineRange)}
                 width={chartW}
                 height={360}
                 spacing={lineSpacing(chart.data.length)}
@@ -620,6 +630,10 @@ function ExpandedChartOverlay({
                 xAxisLabelTextStyle={axisText}
                 yAxisTextStyle={axisText}
                 curved
+                yAxisOffset={lineRange.min}
+                maxValue={lineRange.max - lineRange.min}
+                noOfSections={lineRange.sections}
+                yAxisLabelTexts={lineRange.labels}
                 {...tipTargets(chart.data, pickTip)}
               />
             )}

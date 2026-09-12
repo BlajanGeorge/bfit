@@ -175,3 +175,33 @@ describe('dailyMaxWeightSeries', () => {
     expect(dailyMaxWeightSeries([], groupOf)).toEqual([])
   })
 })
+import { niceRange } from '../src/domain/metrics'
+
+describe('niceRange', () => {
+  it('frames a narrow bodyweight series instead of starting at 0', () => {
+    const r = niceRange([84.6, 84.1, 83.3, 82.5])
+    expect(r.min).toBeLessThan(82.5)
+    expect(r.min).toBeGreaterThan(70)
+    expect(r.max).toBeGreaterThan(84.6)
+    expect(r.labels[0]).toBe(String(r.min))
+    expect(r.labels).toHaveLength(r.sections + 1)
+  })
+  it('gives a single value some room', () => {
+    const r = niceRange([80])
+    expect(r.min).toBeLessThan(80)
+    expect(r.max).toBeGreaterThan(80)
+  })
+  it('keeps a big jump readable without going below zero', () => {
+    const r = niceRange([10, 12, 80])
+    expect(r.min).toBe(0)
+    expect(r.max).toBeGreaterThanOrEqual(80)
+    expect(r.sections).toBeGreaterThanOrEqual(3)
+    expect(r.sections).toBeLessThanOrEqual(8)
+    expect(r.labels).toHaveLength(r.sections + 1)
+  })
+  it('uses fractional steps when the values are close together', () => {
+    const r = niceRange([16.9, 17.1])
+    expect(r.labels.some((l) => l.includes('.'))).toBe(true)
+    expect(r.max - r.min).toBeLessThan(2)
+  })
+})
