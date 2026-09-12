@@ -1,4 +1,4 @@
-appId: com.bfit.app
+appId: com.georgeblajan.bfit
 ---
 - launchApp:
     clearState: true

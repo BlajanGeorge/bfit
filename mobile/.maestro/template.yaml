@@ -1,4 +1,4 @@
-appId: com.bfit.app
+appId: com.georgeblajan.bfit
 # Creates a saved workout template and verifies it appears in the list + add flow.
 ---
 - launchApp

@@ -29,7 +29,7 @@ as SPEC describes.
 - Node **20** (via nvm; `nvm use 20`). Node 16 is too old — always use 20.
 - Xcode + **iOS 26.5 Simulator** runtime installed (iPhone 17 devices available).
 - **Maestro** installed at `~/.maestro/bin` (Java 17 present).
-- iOS bundle id: **com.bfit.app**.
+- iOS bundle id: **com.georgeblajan.bfit**.
 
 ## Run
 
@@ -50,7 +50,7 @@ cd mobile
 ./scripts/ios-shot.sh /tmp/bfit.png       # boots a sim + screenshots
 ```
 
-Drive taps and assertions with Maestro (uses appId com.bfit.app):
+Drive taps and assertions with Maestro (uses appId com.georgeblajan.bfit):
 
 ```bash
 ~/.maestro/bin/maestro test .maestro/smoke.yaml

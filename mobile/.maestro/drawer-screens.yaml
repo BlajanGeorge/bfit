@@ -1,4 +1,4 @@
-appId: com.bfit.app
+appId: com.georgeblajan.bfit
 # Visits each drawer destination and screenshots it. Run after add-workout.yaml.
 ---
 - launchApp

@@ -9,11 +9,11 @@
     "userInterfaceStyle": "dark",
     "ios": {
       "icon": "./assets/images/bfit-logo.png",
-      "bundleIdentifier": "com.bfit.app",
+      "bundleIdentifier": "com.georgeblajan.bfit",
       "supportsTablet": true
     },
     "android": {
-      "package": "com.bfit.app",
+      "package": "com.georgeblajan.bfit",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",

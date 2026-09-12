@@ -1,0 +1,15 @@
+appId: com.georgeblajan.bfit
+---
+- launchApp:
+    clearState: false
+- tapOn: "menu"
+- tapOn: ".*Exercises.*"
+- tapOn: ".*Shoulders.*"
+- tapOn: ".*Face Pull.*"
+- assertVisible: "How to execute"
+- takeScreenshot: exercise-detail-howto
+- scrollUntilVisible:
+    element:
+      text: ".*return slowly.*"
+    direction: DOWN
+- takeScreenshot: exercise-detail-howto-scrolled

@@ -1,4 +1,4 @@
-appId: com.bfit.app
+appId: com.georgeblajan.bfit
 # Assumes onboarding already completed (run onboarding.yaml first).
 ---
 - launchApp
