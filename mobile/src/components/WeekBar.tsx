@@ -1,13 +1,17 @@
-// Horizontal, scrollable day strip for Home. Defaults scrolled to today (end).
+// Day strip for Home. The current week (7 days) fills the width with no clipping;
+// earlier weeks remain reachable by scrolling left.
 import { useMemo, useRef } from 'react'
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
-import { Spacing } from '@/constants/theme'
-import { buildDayStrip } from '@/domain/week'
 import { useTheme } from '@/hooks/use-theme'
+import { buildDayStrip } from '@/domain/week'
 
-const ITEM_W = 52
-const GAP = 8
+const PAD_H = 10
+const GAP = 6
+const SCREEN_W = Dimensions.get('window').width
+// Size cells so exactly 7 fit within the screen width (no horizontal scroll needed
+// to see the current week, and today is never clipped).
+const ITEM_W = Math.floor((SCREEN_W - PAD_H * 2 - GAP * 6) / 7)
 
 export function WeekBar({
   selected,
@@ -39,7 +43,7 @@ export function WeekBar({
               onPress={() => onSelect(d.key)}
               style={[
                 styles.day,
-                { backgroundColor: isSel ? c.primary : c.backgroundElement, borderColor: c.border },
+                { width: ITEM_W, backgroundColor: isSel ? c.primary : c.backgroundElement, borderColor: c.border },
               ]}>
               <Text style={[styles.weekday, { color: isSel ? c.onPrimary : c.textSecondary }]}>
                 {d.weekday}
@@ -63,15 +67,14 @@ export function WeekBar({
 
 const styles = StyleSheet.create({
   wrap: { borderBottomWidth: StyleSheet.hairlineWidth },
-  content: { paddingHorizontal: Spacing.three, paddingVertical: Spacing.two, gap: GAP },
+  content: { paddingHorizontal: PAD_H, paddingVertical: 10, gap: GAP },
   day: {
-    width: ITEM_W,
-    borderRadius: 14,
-    paddingVertical: 10,
+    borderRadius: 12,
+    paddingVertical: 8,
     alignItems: 'center',
     borderWidth: StyleSheet.hairlineWidth,
   },
-  weekday: { fontSize: 12, fontWeight: '600', marginBottom: 4 },
-  num: { fontSize: 18, fontWeight: '700' },
-  dot: { width: 6, height: 6, borderRadius: 3, marginTop: 5 },
+  weekday: { fontSize: 11, fontWeight: '600', marginBottom: 3 },
+  num: { fontSize: 17, fontWeight: '700' },
+  dot: { width: 5, height: 5, borderRadius: 2.5, marginTop: 4 },
 })
