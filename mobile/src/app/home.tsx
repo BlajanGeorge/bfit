@@ -54,7 +54,7 @@ export default function Home() {
   const hasWorkout = !!workout && workout.exercises.length > 0
 
   return (
-    <Screen title="B-Fit" scroll={false}>
+    <Screen title="Home" scroll={false}>
       <WeekBar selected={selected} onSelect={setSelected} workoutDays={days} />
 
       <View style={{ flex: 1, padding: Spacing.three }}>
@@ -72,7 +72,7 @@ export default function Home() {
           <View style={styles.empty}>
             <Icon name="figure.strengthtraining.traditional" color={c.textSecondary} size={54} />
             <Text style={[styles.emptyText, { color: c.textSecondary }]}>
-              No workout today — add your workout
+              {selected === todayKey() ? 'No workout today' : 'No workout on this day'} — add your workout
             </Text>
             <Button label="＋  Add workout" onPress={goAdd} style={{ marginTop: Spacing.three, alignSelf: 'stretch' }} />
           </View>

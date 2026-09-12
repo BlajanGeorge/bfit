@@ -43,10 +43,19 @@ export function WeekBar({
               onPress={() => onSelect(d.key)}
               style={[
                 styles.day,
-                { width: ITEM_W, backgroundColor: isSel ? c.primary : c.backgroundElement, borderColor: c.border },
+                {
+                  width: ITEM_W,
+                  backgroundColor: isSel ? c.primary : c.backgroundElement,
+                  borderColor: d.isToday ? (isSel ? c.onPrimary : c.primary) : c.border,
+                  borderWidth: d.isToday ? 2 : StyleSheet.hairlineWidth,
+                },
               ]}>
-              <Text style={[styles.weekday, { color: isSel ? c.onPrimary : c.textSecondary }]}>
-                {d.weekday}
+              <Text
+                style={[
+                  styles.weekday,
+                  { color: isSel ? c.onPrimary : d.isToday ? c.primary : c.textSecondary },
+                ]}>
+                {d.isToday ? 'Today' : d.weekday}
               </Text>
               <Text style={[styles.num, { color: isSel ? c.onPrimary : c.text }]}>
                 {d.dayOfMonth}
