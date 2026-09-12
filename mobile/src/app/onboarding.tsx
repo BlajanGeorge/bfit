@@ -21,11 +21,12 @@ import { Spacing } from '@/constants/theme'
 import { addBodyEntry, saveProfile } from '@/data/repo'
 import type { BodyStats } from '@/data/repo'
 import { BODY_MEASURES, type Sex } from '@/domain/types'
+import { parseDecimal, sanitizeDecimal } from '@/domain/number'
 import { todayKey } from '@/domain/week'
 import { useTheme } from '@/hooks/use-theme'
 
 const numOrNull = (s: string): number | null => {
-  const n = parseFloat(s)
+  const n = parseDecimal(s)
   return Number.isFinite(n) && n > 0 ? n : null
 }
 
@@ -45,10 +46,10 @@ export default function Onboarding() {
   const [measures, setMeasures] = useState<Record<string, string>>({})
 
   const setMeasure = (key: string, v: string) =>
-    setMeasures((m) => ({ ...m, [key]: v.replace(/[^0-9.]/g, '') }))
+    setMeasures((m) => ({ ...m, [key]: sanitizeDecimal(v) }))
 
-  const heightN = parseFloat(height)
-  const weightN = parseFloat(weight)
+  const heightN = parseDecimal(height)
+  const weightN = parseDecimal(weight)
   const valid =
     name.trim().length > 0 &&
     heightN > 0 && heightN < 260 &&
@@ -135,9 +136,9 @@ export default function Onboarding() {
             <Text style={[styles.label, { color: c.textSecondary }]}>Height (cm)</Text>
             <TextInput
               value={height}
-              onChangeText={setHeight}
+              onChangeText={(t) => setHeight(sanitizeDecimal(t))}
               placeholder="175"
-              keyboardType="numeric"
+              keyboardType="decimal-pad"
               placeholderTextColor={c.textSecondary}
               style={input}
             />
@@ -147,9 +148,9 @@ export default function Onboarding() {
             <Text style={[styles.label, { color: c.textSecondary }]}>Weight (kg)</Text>
             <TextInput
               value={weight}
-              onChangeText={setWeight}
+              onChangeText={(t) => setWeight(sanitizeDecimal(t))}
               placeholder="75"
-              keyboardType="numeric"
+              keyboardType="decimal-pad"
               placeholderTextColor={c.textSecondary}
               style={input}
             />
@@ -177,7 +178,7 @@ export default function Onboarding() {
             <Text style={[styles.label, { color: c.textSecondary }]}>Body fat (%)</Text>
             <TextInput
               value={bodyFat}
-              onChangeText={(t) => setBodyFat(t.replace(/[^0-9.]/g, ''))}
+              onChangeText={(t) => setBodyFat(sanitizeDecimal(t))}
               placeholder="e.g. 18"
               keyboardType="decimal-pad"
               placeholderTextColor={c.textSecondary}

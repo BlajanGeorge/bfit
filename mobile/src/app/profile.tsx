@@ -23,11 +23,12 @@ import { Spacing } from '@/constants/theme'
 import { addBodyEntry, getLatestBodyEntry, getProfile, saveProfile } from '@/data/repo'
 import type { BodyStats } from '@/data/repo'
 import { BODY_MEASURES, type BodyMeasureKey, type Sex } from '@/domain/types'
+import { parseDecimal, sanitizeDecimal } from '@/domain/number'
 import { todayKey } from '@/domain/week'
 import { useTheme } from '@/hooks/use-theme'
 
 const numOrNull = (s: string): number | null => {
-  const n = parseFloat(s)
+  const n = parseDecimal(s)
   return Number.isFinite(n) && n > 0 ? n : null
 }
 const str = (n: number | null | undefined): string => (n != null ? String(n) : '')
@@ -46,7 +47,7 @@ export default function Profile() {
   const [measures, setMeasures] = useState<Record<string, string>>({})
 
   const setMeasure = (key: string, v: string) =>
-    setMeasures((m) => ({ ...m, [key]: v.replace(/[^0-9.]/g, '') }))
+    setMeasures((m) => ({ ...m, [key]: sanitizeDecimal(v) }))
 
   const load = useCallback(async () => {
     const [p, bw] = await Promise.all([getProfile(), getLatestBodyEntry()])
@@ -69,7 +70,7 @@ export default function Profile() {
   useFocusEffect(useCallback(() => { load() }, [load]))
 
   const saveDetails = async () => {
-    const h = parseFloat(height)
+    const h = parseDecimal(height)
     if (!name.trim() || !(h > 0)) {
       Alert.alert('Check your details', 'Please enter a name and a valid height.')
       return
@@ -79,7 +80,7 @@ export default function Profile() {
   }
 
   const logBody = async () => {
-    const w = parseFloat(weight)
+    const w = parseDecimal(weight)
     if (!(w > 0)) {
       Alert.alert('Invalid weight', 'Enter your current weight in kg.')
       return
@@ -131,7 +132,7 @@ export default function Profile() {
             <Text style={[styles.label, { color: c.textSecondary }]}>Bodyweight (kg)</Text>
             <TextInput
               value={weight}
-              onChangeText={(t) => setWeight(t.replace(/[^0-9.]/g, ''))}
+              onChangeText={(t) => setWeight(sanitizeDecimal(t))}
               keyboardType="decimal-pad"
               placeholder="kg"
               placeholderTextColor={c.textSecondary}
@@ -141,7 +142,7 @@ export default function Profile() {
             <Text style={[styles.label, { color: c.textSecondary }]}>Body fat (%)</Text>
             <TextInput
               value={bodyFat}
-              onChangeText={(t) => setBodyFat(t.replace(/[^0-9.]/g, ''))}
+              onChangeText={(t) => setBodyFat(sanitizeDecimal(t))}
               keyboardType="decimal-pad"
               placeholder="optional"
               placeholderTextColor={c.textSecondary}
@@ -195,7 +196,7 @@ export default function Profile() {
             <Text style={[styles.label, { color: c.textSecondary }]}>Height (cm)</Text>
             <TextInput
               value={height}
-              onChangeText={(t) => setHeight(t.replace(/[^0-9.]/g, ''))}
+              onChangeText={(t) => setHeight(sanitizeDecimal(t))}
               keyboardType="decimal-pad"
               style={input}
             />

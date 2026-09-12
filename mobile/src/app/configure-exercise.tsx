@@ -19,6 +19,7 @@ import { Spacing } from '@/constants/theme'
 import { exerciseName, groupOf } from '@/data/catalog'
 import { useTheme } from '@/hooks/use-theme'
 import { useBuilder } from '@/store/builder'
+import { parseDecimal, sanitizeDecimal } from '@/domain/number'
 
 interface Row {
   reps: string
@@ -54,7 +55,7 @@ export default function ConfigureExercise() {
     setRows((prev) => [...prev, prev.length ? { ...prev[prev.length - 1] } : { reps: '10', weightKg: '20' }])
   const removeRow = (i: number) => setRows((prev) => prev.filter((_, idx) => idx !== i))
 
-  const parsed = rows.map((r) => ({ reps: parseInt(r.reps, 10), weightKg: parseFloat(r.weightKg) }))
+  const parsed = rows.map((r) => ({ reps: parseInt(r.reps, 10), weightKg: parseDecimal(r.weightKg) }))
   const valid =
     parsed.length > 0 &&
     parsed.every((s) => Number.isFinite(s.reps) && s.reps > 0 && Number.isFinite(s.weightKg) && s.weightKg >= 0)
@@ -103,7 +104,7 @@ export default function ConfigureExercise() {
             />
             <TextInput
               value={r.weightKg}
-              onChangeText={(t) => setRow(i, { weightKg: t.replace(/[^0-9.]/g, '') })}
+              onChangeText={(t) => setRow(i, { weightKg: sanitizeDecimal(t) })}
               keyboardType="decimal-pad"
               style={[inputStyle, { flex: 1 }]}
             />
