@@ -362,6 +362,18 @@
       ]
     },
     {
+      "id": "reverse-pec-deck",
+      "name": "Reverse Pec Deck (Rear Delt Fly)",
+      "group": "Shoulders",
+      "subGroup": "Rear Delt",
+      "howto": [
+        "Sit facing into the machine, chest against the pad, feet flat on the floor.",
+        "Grip the handles with arms extended forward, elbows slightly bent.",
+        "Sweep your arms out and back, squeezing your shoulder blades together.",
+        "Return under control to the start; keep the same slight elbow bend throughout."
+      ]
+    },
+    {
       "id": "face-pull",
       "name": "Face Pull",
       "group": "Shoulders",

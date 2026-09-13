@@ -110,6 +110,7 @@ export const EXERCISE_ANIMATIONS: Partial<Record<string, ImageSourcePropType>> =
   'crunch': require('@/assets/animations/crunch.webp'),
   'plank': require('@/assets/animations/plank.webp'),
   'russian-twist': require('@/assets/animations/russian-twist.webp'),
+  'reverse-pec-deck': require('@/assets/animations/reverse-pec-deck.webp'),
 }
 
 export function getExerciseAnimation(id: string): ImageSourcePropType | undefined {
@@ -180,6 +181,7 @@ export const EXERCISE_THUMBS: Partial<Record<string, ImageSourcePropType>> = {
   'plank': require('@/assets/exercise-thumbs/plank.png'),
   'crunch': require('@/assets/exercise-thumbs/crunch.png'),
   'hanging-leg-raise': require('@/assets/exercise-thumbs/hanging-leg-raise.png'),
+  'reverse-pec-deck': require('@/assets/exercise-thumbs/reverse-pec-deck.png'),
 }
 
 export function getExerciseThumb(id: string): ImageSourcePropType | undefined {

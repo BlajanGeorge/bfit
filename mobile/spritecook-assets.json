@@ -605,6 +605,16 @@
       "sha12": "15a967b503c2"
     }
   },
+  "reverse-pec-deck": {
+    "animation": {
+      "asset_id": "85b3a3a6-fbe7-49eb-ab28-f7dc849164e3",
+      "sha12": "80bc6a3b1fa2"
+    },
+    "start": {
+      "asset_id": "85b3a3a6-fbe7-49eb-ab28-f7dc849164e3",
+      "sha12": "c51148b291bf"
+    }
+  },
   "romanian-deadlift": {
     "animation": {
       "asset_id": "09d8b693-ff23-4c5a-854d-467f9798dc94",
