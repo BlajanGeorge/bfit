@@ -60,16 +60,7 @@ export default function BuildWorkout() {
   const title = isTemplate ? (templateId ? 'Edit template' : 'New template') : 'Build workout'
 
   return (
-    <Screen
-      title={title}
-      leading="back"
-      rightAction={
-        <TouchableOpacity onPress={onSave} disabled={!canSave || saving}>
-          <Text style={{ color: canSave ? c.primary : c.textSecondary, fontWeight: '700', fontSize: 16 }}>
-            Save
-          </Text>
-        </TouchableOpacity>
-      }>
+    <Screen title={title} leading="back">
       {isTemplate ? (
         <>
           <Text style={[styles.label, { color: c.textSecondary }]}>Template name</Text>
