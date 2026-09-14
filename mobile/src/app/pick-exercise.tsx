@@ -13,13 +13,21 @@ import { useTheme } from '@/hooks/use-theme'
 export default function PickExercise() {
   const c = useTheme()
   const router = useRouter()
-  const { group, browse } = useLocalSearchParams<{ group: MuscleGroup; browse?: string }>()
+  const { group, browse, superset } = useLocalSearchParams<{
+    group: MuscleGroup
+    browse?: string
+    superset?: string
+  }>()
   const list = exercisesForGroup(group)
   const isBrowse = browse === '1'
 
   const onPick = (id: string) => {
     if (isBrowse) router.push({ pathname: '/exercise-detail', params: { exerciseId: id } })
-    else router.push({ pathname: '/configure-exercise', params: { exerciseId: id } })
+    else
+      router.push({
+        pathname: '/configure-exercise',
+        params: { exerciseId: id, superset: superset ?? '' },
+      })
   }
 
   return (

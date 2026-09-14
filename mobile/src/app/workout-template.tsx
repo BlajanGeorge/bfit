@@ -7,10 +7,12 @@ import { ExerciseThumb } from '@/components/ExerciseThumb'
 import { Card } from '@/components/ui/Button'
 import { Icon } from '@/components/ui/Icon'
 import { Screen } from '@/components/ui/Screen'
+import { SupersetBadge } from '@/components/ui/SupersetBadge'
 import { Spacing } from '@/constants/theme'
 import { exerciseName, groupOf } from '@/data/catalog'
 import { getSavedWorkout } from '@/data/repo'
-import type { SavedWorkout } from '@/domain/types'
+import { groupExercises } from '@/domain/superset'
+import type { SavedWorkout, WorkoutExercise } from '@/domain/types'
 import { useTheme } from '@/hooks/use-theme'
 import { useBuilder } from '@/store/builder'
 
@@ -35,6 +37,33 @@ export default function WorkoutTemplate() {
 
   const setCount = t?.exercises.reduce((n, e) => n + e.sets.length, 0) ?? 0
 
+  const renderRow = (we: WorkoutExercise) => (
+    <>
+      <TouchableOpacity
+        style={styles.row}
+        onPress={() => router.push({ pathname: '/exercise-detail', params: { exerciseId: we.exerciseId } })}>
+        <ExerciseThumb exerciseId={we.exerciseId} size={56} />
+        <View style={{ flex: 1 }}>
+          <Text style={[styles.name, { color: c.text }]}>{exerciseName(we.exerciseId)}</Text>
+          <Text style={{ color: c.textSecondary, fontSize: 13, marginTop: 2 }}>
+            {groupOf(we.exerciseId)} · {we.sets.length} sets
+          </Text>
+        </View>
+        <Icon name="chevron.right" color={c.textSecondary} size={16} />
+      </TouchableOpacity>
+      <View style={styles.sets}>
+        {we.sets.map((s, j) => (
+          <View key={j} style={[styles.set, { backgroundColor: c.background, borderColor: c.border }]}>
+            <Text style={{ color: c.textSecondary, fontSize: 11 }}>SET {j + 1}</Text>
+            <Text style={{ color: c.text, fontWeight: '700', fontSize: 14 }}>
+              {s.weightKg > 0 ? `${s.reps} × ${s.weightKg} kg` : `${s.reps} reps`}
+            </Text>
+          </View>
+        ))}
+      </View>
+    </>
+  )
+
   return (
     <Screen
       title={t?.name ?? 'Template'}
@@ -57,36 +86,18 @@ export default function WorkoutTemplate() {
             </Card>
           ) : (
             <View style={{ gap: Spacing.two }}>
-              {t.exercises.map((we, i) => (
-                <Card key={`${we.exerciseId}-${i}`}>
-                  <TouchableOpacity
-                    style={styles.row}
-                    onPress={() =>
-                      router.push({ pathname: '/exercise-detail', params: { exerciseId: we.exerciseId } })
-                    }>
-                    <ExerciseThumb exerciseId={we.exerciseId} size={56} />
-                    <View style={{ flex: 1 }}>
-                      <Text style={[styles.name, { color: c.text }]}>{exerciseName(we.exerciseId)}</Text>
-                      <Text style={{ color: c.textSecondary, fontSize: 13, marginTop: 2 }}>
-                        {groupOf(we.exerciseId)} · {we.sets.length} sets
-                      </Text>
-                    </View>
-                    <Icon name="chevron.right" color={c.textSecondary} size={16} />
-                  </TouchableOpacity>
-                  <View style={styles.sets}>
-                    {we.sets.map((s, j) => (
-                      <View
-                        key={j}
-                        style={[styles.set, { backgroundColor: c.background, borderColor: c.border }]}>
-                        <Text style={{ color: c.textSecondary, fontSize: 11 }}>SET {j + 1}</Text>
-                        <Text style={{ color: c.text, fontWeight: '700', fontSize: 14 }}>
-                          {s.weightKg > 0 ? `${s.reps} × ${s.weightKg} kg` : `${s.reps} reps`}
-                        </Text>
-                      </View>
-                    ))}
-                  </View>
-                </Card>
-              ))}
+              {groupExercises(t.exercises).map((g) =>
+                g.kind === 'single' ? (
+                  <Card key={`${g.item.exerciseId}-${g.index}`}>{renderRow(g.item)}</Card>
+                ) : (
+                  <Card key={`${g.items[0].exerciseId}-${g.indices[0]}`}>
+                    <SupersetBadge />
+                    {renderRow(g.items[0])}
+                    <View style={{ height: Spacing.three }} />
+                    {renderRow(g.items[1])}
+                  </Card>
+                ),
+              )}
             </View>
           )}
         </>

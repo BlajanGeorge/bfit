@@ -7,21 +7,29 @@ import { Screen } from '@/components/ui/Screen'
 import { Spacing } from '@/constants/theme'
 import { MUSCLE_GROUPS, MUSCLE_IMAGES, exercisesForGroup } from '@/data/catalog'
 import { useTheme } from '@/hooks/use-theme'
+import { useBuilder } from '@/store/builder'
 
 export default function PickGroup() {
   const c = useTheme()
   const router = useRouter()
-  const { browse } = useLocalSearchParams<{ browse?: string }>()
+  const { browse, superset } = useLocalSearchParams<{ browse?: string; superset?: string }>()
+  const supersetDraft = useBuilder((s) => s.supersetDraft)
+  const isSuperset = superset === '1'
 
   return (
-    <Screen title="Choose a muscle" leading="back">
+    <Screen title={isSuperset ? (supersetDraft ? 'Superset · pick exercise 2' : 'Superset · pick exercise 1') : 'Choose a muscle'} leading="back">
       <View style={styles.grid}>
         {MUSCLE_GROUPS.map((g) => (
           <TouchableOpacity
             key={g}
             style={[styles.card, { backgroundColor: c.backgroundElement, borderColor: c.border }]}
             activeOpacity={0.85}
-            onPress={() => router.push({ pathname: '/pick-exercise', params: { group: g, browse: browse ?? '' } })}>
+            onPress={() =>
+              router.push({
+                pathname: '/pick-exercise',
+                params: { group: g, browse: browse ?? '', superset: superset ?? '' },
+              })
+            }>
             <Image source={MUSCLE_IMAGES[g]} style={styles.img} contentFit="cover" transition={120} />
             <View style={styles.labelRow}>
               <Text style={[styles.label, { color: c.text }]}>{g}</Text>

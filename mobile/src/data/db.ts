@@ -126,6 +126,17 @@ async function migrateBodyDayUnique(db: SQLite.SQLiteDatabase): Promise<void> {
   )
 }
 
+// Additive migration for superset pairing: two exercises in a workout (or
+// template) that share a superset_id are done back-to-back as one superset.
+async function migrateSupersetColumns(db: SQLite.SQLiteDatabase): Promise<void> {
+  for (const table of ['workout_exercises', 'saved_workout_exercises']) {
+    const cols = await db.getAllAsync<{ name: string }>(`PRAGMA table_info(${table})`)
+    if (!cols.some((c) => c.name === 'superset_id')) {
+      await db.execAsync(`ALTER TABLE ${table} ADD COLUMN superset_id TEXT;`)
+    }
+  }
+}
+
 async function seedCatalog(db: SQLite.SQLiteDatabase): Promise<void> {
   const row = await db.getFirstAsync<{ c: number }>('SELECT COUNT(*) AS c FROM exercises')
   if (row && row.c === CATALOG.length) return
@@ -150,6 +161,7 @@ async function open(): Promise<SQLite.SQLiteDatabase> {
   await db.execAsync(SCHEMA)
   await migrateBodyColumns(db)
   await migrateBodyDayUnique(db)
+  await migrateSupersetColumns(db)
   await seedCatalog(db)
   return db
 }

@@ -150,8 +150,8 @@ async function loadExercises(
   setsCol: 'workout_exercise_id' | 'saved_workout_exercise_id',
   parentId: string,
 ): Promise<WorkoutExercise[]> {
-  const exRows = await db.getAllAsync<{ id: string; exercise_id: string }>(
-    `SELECT id, exercise_id FROM ${parentTable} WHERE ${parentCol} = ? ORDER BY position ASC`,
+  const exRows = await db.getAllAsync<{ id: string; exercise_id: string; superset_id: string | null }>(
+    `SELECT id, exercise_id, superset_id FROM ${parentTable} WHERE ${parentCol} = ? ORDER BY position ASC`,
     [parentId],
   )
   const out: WorkoutExercise[] = []
@@ -163,6 +163,7 @@ async function loadExercises(
     out.push({
       exerciseId: ex.exercise_id,
       sets: setRows.map((s) => ({ reps: s.reps, weightKg: s.weight_kg })),
+      supersetId: ex.superset_id ?? undefined,
     })
   }
   return out
@@ -221,8 +222,8 @@ export async function saveWorkoutForDate(
       const we = exercises[i]
       const weId = uid()
       await db.runAsync(
-        'INSERT INTO workout_exercises (id, workout_id, exercise_id, position) VALUES (?, ?, ?, ?)',
-        [weId, wid, we.exerciseId, i],
+        'INSERT INTO workout_exercises (id, workout_id, exercise_id, position, superset_id) VALUES (?, ?, ?, ?, ?)',
+        [weId, wid, we.exerciseId, i, we.supersetId ?? null],
       )
       for (let j = 0; j < we.sets.length; j++) {
         await db.runAsync(
@@ -285,8 +286,8 @@ export async function saveSavedWorkout(
       const we = exercises[i]
       const weId = uid()
       await db.runAsync(
-        'INSERT INTO saved_workout_exercises (id, saved_workout_id, exercise_id, position) VALUES (?, ?, ?, ?)',
-        [weId, swId, we.exerciseId, i],
+        'INSERT INTO saved_workout_exercises (id, saved_workout_id, exercise_id, position, superset_id) VALUES (?, ?, ?, ?, ?)',
+        [weId, swId, we.exerciseId, i, we.supersetId ?? null],
       )
       for (let j = 0; j < we.sets.length; j++) {
         await db.runAsync(

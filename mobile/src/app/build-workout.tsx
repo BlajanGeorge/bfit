@@ -7,9 +7,12 @@ import { ExerciseThumb } from '@/components/ExerciseThumb'
 import { Button, Card } from '@/components/ui/Button'
 import { Icon } from '@/components/ui/Icon'
 import { Screen } from '@/components/ui/Screen'
+import { SupersetBadge } from '@/components/ui/SupersetBadge'
 import { Spacing } from '@/constants/theme'
 import { exerciseName, groupOf } from '@/data/catalog'
 import { getWorkoutByDate, saveSavedWorkout, saveWorkoutForDate } from '@/data/repo'
+import { groupExercises } from '@/domain/superset'
+import type { WorkoutExercise } from '@/domain/types'
 import { dayLabel } from '@/domain/week'
 import { useTheme } from '@/hooks/use-theme'
 import { useBuilder } from '@/store/builder'
@@ -27,6 +30,7 @@ export default function BuildWorkout() {
   const setName = useBuilder((s) => s.setName)
   const removeExercise = useBuilder((s) => s.removeExercise)
   const startDay = useBuilder((s) => s.startDay)
+  const clearSupersetDraft = useBuilder((s) => s.clearSupersetDraft)
 
   const [saving, setSaving] = useState(false)
 
@@ -59,6 +63,32 @@ export default function BuildWorkout() {
 
   const title = isTemplate ? (templateId ? 'Edit template' : 'New template') : 'Build workout'
 
+  const goAddExercise = () => router.push('/pick-group')
+  const goAddSuperset = () => {
+    clearSupersetDraft()
+    router.push({ pathname: '/pick-group', params: { superset: '1' } })
+  }
+
+  const renderRow = (we: WorkoutExercise, i: number) => (
+    <View key={i} style={styles.exCard}>
+      <TouchableOpacity
+        style={styles.exBody}
+        onPress={() => router.push({ pathname: '/configure-exercise', params: { exerciseId: we.exerciseId, index: String(i) } })}>
+        <ExerciseThumb exerciseId={we.exerciseId} size={48} />
+        <View style={{ flex: 1 }}>
+          <Text style={[styles.exName, { color: c.text }]}>{exerciseName(we.exerciseId)}</Text>
+          <Text style={{ color: c.textSecondary, fontSize: 13, marginTop: 2 }}>
+            {groupOf(we.exerciseId)} · {we.sets.length} sets ·{' '}
+            {we.sets.map((s) => `${s.reps}×${s.weightKg}kg`).join(', ')}
+          </Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => removeExercise(i)} style={styles.trash}>
+        <Icon name="trash" color={c.danger} size={18} />
+      </TouchableOpacity>
+    </View>
+  )
+
   return (
     <Screen title={title} leading="back">
       {isTemplate ? (
@@ -83,30 +113,28 @@ export default function BuildWorkout() {
         </Card>
       ) : (
         <View style={{ gap: Spacing.two }}>
-          {exercises.map((we, i) => (
-            <Card key={i} style={styles.exCard}>
-              <TouchableOpacity
-                style={styles.exBody}
-                onPress={() => router.push({ pathname: '/configure-exercise', params: { exerciseId: we.exerciseId, index: String(i) } })}>
-                <ExerciseThumb exerciseId={we.exerciseId} size={48} />
-                <View style={{ flex: 1 }}>
-                  <Text style={[styles.exName, { color: c.text }]}>{exerciseName(we.exerciseId)}</Text>
-                  <Text style={{ color: c.textSecondary, fontSize: 13, marginTop: 2 }}>
-                    {groupOf(we.exerciseId)} · {we.sets.length} sets ·{' '}
-                    {we.sets.map((s) => `${s.reps}×${s.weightKg}kg`).join(', ')}
-                  </Text>
+          {groupExercises(exercises).map((g) =>
+            g.kind === 'single' ? (
+              <Card key={g.index}>{renderRow(g.item, g.index)}</Card>
+            ) : (
+              <Card key={g.indices[0]}>
+                <SupersetBadge />
+                {renderRow(g.items[0], g.indices[0])}
+                <View style={[styles.supersetDivider, { borderColor: c.border }]}>
+                  <Text style={{ color: c.textSecondary, fontSize: 12, fontWeight: '700' }}>+</Text>
                 </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => removeExercise(i)} style={styles.trash}>
-                <Icon name="trash" color={c.danger} size={18} />
-              </TouchableOpacity>
-            </Card>
-          ))}
+                {renderRow(g.items[1], g.indices[1])}
+              </Card>
+            ),
+          )}
         </View>
       )}
 
       <View style={{ height: Spacing.three }} />
-      <Button label="＋  Add exercise" variant="secondary" onPress={() => router.push('/pick-group')} />
+      <View style={{ flexDirection: 'row', gap: Spacing.two }}>
+        <Button label="＋  Add exercise" variant="secondary" onPress={goAddExercise} style={{ flex: 1 }} />
+        <Button label="＋  Add superset" variant="secondary" onPress={goAddSuperset} style={{ flex: 1 }} />
+      </View>
 
       {canSave && (
         <>
@@ -126,4 +154,10 @@ const styles = StyleSheet.create({
   exBody: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: Spacing.three },
   exName: { fontSize: 16, fontWeight: '700' },
   trash: { padding: Spacing.two, marginLeft: Spacing.two },
+  supersetDivider: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    marginVertical: -1,
+  },
 })

@@ -30,6 +30,9 @@ export interface WorkoutSet {
 export interface WorkoutExercise {
   exerciseId: string
   sets: WorkoutSet[]
+  /** Set on both exercises of a superset pair (same id on both, back-to-back
+   *  in the list). Undefined for a normal, standalone exercise. */
+  supersetId?: string
 }
 
 /** A logged workout on a given day. */

@@ -1,17 +1,19 @@
 // Home: week strip + the selected day's workout (expandable) or an empty state.
 import { useFocusEffect, useRouter } from 'expo-router'
 import { useCallback, useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 import { ExerciseThumb } from '@/components/ExerciseThumb'
 import { WeekBar } from '@/components/WeekBar'
 import { Button, Card } from '@/components/ui/Button'
 import { Icon } from '@/components/ui/Icon'
 import { Screen } from '@/components/ui/Screen'
+import { SupersetBadge } from '@/components/ui/SupersetBadge'
 import { Spacing } from '@/constants/theme'
 import { exerciseName, groupOf } from '@/data/catalog'
 import { getWorkoutByDate, getWorkoutDays } from '@/data/repo'
-import type { Workout } from '@/domain/types'
+import { groupExercises } from '@/domain/superset'
+import type { Workout, WorkoutExercise } from '@/domain/types'
 import { dayLabel, todayKey } from '@/domain/week'
 import { useTheme } from '@/hooks/use-theme'
 import { useBuilder } from '@/store/builder'
@@ -53,11 +55,43 @@ export default function Home() {
 
   const hasWorkout = !!workout && workout.exercises.length > 0
 
+  const renderRow = (we: WorkoutExercise, i: number) => {
+    const open = expanded.has(i)
+    const totalSets = we.sets.length
+    return (
+      <TouchableOpacity key={i} activeOpacity={0.9} onPress={() => toggle(i)}>
+        <View style={styles.exRow}>
+          <ExerciseThumb exerciseId={we.exerciseId} size={48} />
+          <View style={{ flex: 1 }}>
+            <Text style={[styles.exName, { color: c.text }]}>{exerciseName(we.exerciseId)}</Text>
+            <Text style={{ color: c.textSecondary, marginTop: 2, fontSize: 13 }}>
+              {groupOf(we.exerciseId)} · {totalSets} {totalSets === 1 ? 'set' : 'sets'}
+            </Text>
+          </View>
+          <Icon name={open ? 'chevron.up' : 'chevron.down'} color={c.textSecondary} size={16} />
+        </View>
+        {open && (
+          <View style={{ marginTop: Spacing.two, gap: 4 }}>
+            {we.sets.map((s, j) => (
+              <View key={j} style={[styles.setRow, { borderTopColor: c.border }]}>
+                <Text style={{ color: c.textSecondary, width: 60 }}>Set {j + 1}</Text>
+                <Text style={{ color: c.text, flex: 1 }}>{s.reps} reps</Text>
+                <Text style={{ color: c.text, fontWeight: '600' }}>{s.weightKg} kg</Text>
+              </View>
+            ))}
+          </View>
+        )}
+      </TouchableOpacity>
+    )
+  }
+
   return (
     <Screen title="Home" scroll={false}>
       <WeekBar selected={selected} onSelect={setSelected} workoutDays={days} />
 
-      <View style={{ flex: 1, padding: Spacing.three }}>
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1, padding: Spacing.three }}>
         <View style={styles.dayHeader}>
           <Text style={[styles.dayLabel, { color: c.text }]}>{dayLabel(selected)}</Text>
           {hasWorkout && (
@@ -77,38 +111,19 @@ export default function Home() {
             <Button label="＋  Add workout" onPress={goAdd} style={{ marginTop: Spacing.three, alignSelf: 'stretch' }} />
           </View>
         ) : (
-          <View style={{ gap: Spacing.two, marginTop: Spacing.two }}>
-            {workout!.exercises.map((we, i) => {
-              const open = expanded.has(i)
-              const totalSets = we.sets.length
-              return (
-                <TouchableOpacity key={i} activeOpacity={0.9} onPress={() => toggle(i)}>
-                  <Card>
-                    <View style={styles.exRow}>
-                      <ExerciseThumb exerciseId={we.exerciseId} size={48} />
-                      <View style={{ flex: 1 }}>
-                        <Text style={[styles.exName, { color: c.text }]}>{exerciseName(we.exerciseId)}</Text>
-                        <Text style={{ color: c.textSecondary, marginTop: 2, fontSize: 13 }}>
-                          {groupOf(we.exerciseId)} · {totalSets} {totalSets === 1 ? 'set' : 'sets'}
-                        </Text>
-                      </View>
-                      <Icon name={open ? 'chevron.up' : 'chevron.down'} color={c.textSecondary} size={16} />
-                    </View>
-                    {open && (
-                      <View style={{ marginTop: Spacing.two, gap: 4 }}>
-                        {we.sets.map((s, j) => (
-                          <View key={j} style={[styles.setRow, { borderTopColor: c.border }]}>
-                            <Text style={{ color: c.textSecondary, width: 60 }}>Set {j + 1}</Text>
-                            <Text style={{ color: c.text, flex: 1 }}>{s.reps} reps</Text>
-                            <Text style={{ color: c.text, fontWeight: '600' }}>{s.weightKg} kg</Text>
-                          </View>
-                        ))}
-                      </View>
-                    )}
-                  </Card>
-                </TouchableOpacity>
-              )
-            })}
+          <View style={{ gap: Spacing.two, marginTop: Spacing.two, paddingBottom: Spacing.six }}>
+            {groupExercises(workout!.exercises).map((g) =>
+              g.kind === 'single' ? (
+                <Card key={g.index}>{renderRow(g.item, g.index)}</Card>
+              ) : (
+                <Card key={g.indices[0]}>
+                  <SupersetBadge />
+                  {renderRow(g.items[0], g.indices[0])}
+                  <View style={{ height: Spacing.three }} />
+                  {renderRow(g.items[1], g.indices[1])}
+                </Card>
+              ),
+            )}
             <Button
               label="＋  Add / edit exercises"
               variant="secondary"
@@ -117,7 +132,7 @@ export default function Home() {
             />
           </View>
         )}
-      </View>
+      </ScrollView>
     </Screen>
   )
 }

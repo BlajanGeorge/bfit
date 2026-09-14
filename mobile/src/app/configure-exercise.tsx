@@ -20,6 +20,7 @@ import { exerciseName, groupOf } from '@/data/catalog'
 import { useTheme } from '@/hooks/use-theme'
 import { useBuilder } from '@/store/builder'
 import { parseDecimal, sanitizeDecimal } from '@/domain/number'
+import type { WorkoutExercise } from '@/domain/types'
 
 interface Row {
   reps: string
@@ -30,14 +31,23 @@ export default function ConfigureExercise() {
   const c = useTheme()
   const router = useRouter()
   const insets = useSafeAreaInsets()
-  const { exerciseId, index } = useLocalSearchParams<{ exerciseId: string; index?: string }>()
+  const { exerciseId, index, superset } = useLocalSearchParams<{
+    exerciseId: string
+    index?: string
+    superset?: string
+  }>()
 
   const exercises = useBuilder((s) => s.exercises)
   const addExercise = useBuilder((s) => s.addExercise)
   const updateExercise = useBuilder((s) => s.updateExercise)
+  const supersetDraft = useBuilder((s) => s.supersetDraft)
+  const stashSupersetFirst = useBuilder((s) => s.stashSupersetFirst)
+  const completeSuperset = useBuilder((s) => s.completeSuperset)
 
   const editIndex = index !== undefined ? parseInt(index, 10) : -1
   const existing = editIndex >= 0 ? exercises[editIndex] : undefined
+  const isSupersetFlow = superset === '1' && editIndex < 0
+  const isSecondOfPair = isSupersetFlow && !!supersetDraft
 
   const [rows, setRows] = useState<Row[]>(
     existing
@@ -62,9 +72,27 @@ export default function ConfigureExercise() {
 
   const onSave = () => {
     if (!valid) return
-    const we = { exerciseId, sets: parsed }
-    if (editIndex >= 0) updateExercise(editIndex, we)
-    else addExercise(we)
+    const we: WorkoutExercise = {
+      exerciseId,
+      sets: parsed,
+      ...(existing?.supersetId ? { supersetId: existing.supersetId } : {}),
+    }
+    if (editIndex >= 0) {
+      updateExercise(editIndex, we)
+      router.dismissTo('/build-workout')
+      return
+    }
+    if (isSupersetFlow) {
+      if (isSecondOfPair) {
+        completeSuperset(we)
+        router.dismissTo('/build-workout')
+      } else {
+        stashSupersetFirst(we)
+        router.push({ pathname: '/pick-group', params: { superset: '1' } })
+      }
+      return
+    }
+    addExercise(we)
     router.dismissTo('/build-workout')
   }
 
@@ -77,7 +105,13 @@ export default function ConfigureExercise() {
           <Icon name="chevron.left" color={c.text} size={24} />
         </TouchableOpacity>
         <Text style={[styles.title, { color: c.text }]} numberOfLines={1}>
-          {editIndex >= 0 ? 'Edit exercise' : 'Add exercise'}
+          {editIndex >= 0
+            ? 'Edit exercise'
+            : isSupersetFlow
+              ? isSecondOfPair
+                ? 'Superset · exercise 2'
+                : 'Superset · exercise 1'
+              : 'Add exercise'}
         </Text>
         <View style={styles.iconBtn} />
       </View>
@@ -116,7 +150,19 @@ export default function ConfigureExercise() {
 
         <Button label="＋  Add set" variant="secondary" onPress={addRow} style={{ marginTop: Spacing.two }} />
         <View style={{ height: Spacing.four }} />
-        <Button label={editIndex >= 0 ? 'Save changes' : 'Add to workout'} onPress={onSave} disabled={!valid} />
+        <Button
+          label={
+            editIndex >= 0
+              ? 'Save changes'
+              : isSupersetFlow
+                ? isSecondOfPair
+                  ? 'Add superset'
+                  : 'Next: pick 2nd exercise'
+                : 'Add to workout'
+          }
+          onPress={onSave}
+          disabled={!valid}
+        />
       </ScrollView>
     </KeyboardAvoidingView>
   )
