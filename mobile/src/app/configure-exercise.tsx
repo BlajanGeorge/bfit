@@ -1,4 +1,5 @@
 // Set the sets/reps/kg for a chosen exercise, then add it to the draft workout.
+import { Image } from 'expo-image'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import { useState } from 'react'
 import {
@@ -16,7 +17,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Button } from '@/components/ui/Button'
 import { Icon } from '@/components/ui/Icon'
 import { Spacing } from '@/constants/theme'
-import { exerciseName, groupOf } from '@/data/catalog'
+import { exerciseName, getExerciseAnimation, groupOf } from '@/data/catalog'
 import { useTheme } from '@/hooks/use-theme'
 import { useBuilder } from '@/store/builder'
 import { parseDecimal, sanitizeDecimal } from '@/domain/number'
@@ -97,6 +98,8 @@ export default function ConfigureExercise() {
   }
 
   const inputStyle = [styles.input, { backgroundColor: c.background, borderColor: c.border, color: c.text }]
+  const anim = getExerciseAnimation(exerciseId)
+  const goDetail = () => router.push({ pathname: '/exercise-detail', params: { exerciseId } })
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1, backgroundColor: c.background }}>
@@ -117,8 +120,27 @@ export default function ConfigureExercise() {
       </View>
 
       <ScrollView contentContainerStyle={{ padding: Spacing.three, paddingBottom: insets.bottom + Spacing.six }} keyboardShouldPersistTaps="handled">
-        <Text style={[styles.exName, { color: c.text }]}>{exerciseName(exerciseId)}</Text>
-        <Text style={{ color: c.textSecondary, marginBottom: Spacing.three }}>{groupOf(exerciseId)}</Text>
+        <View style={styles.exHeader}>
+          <View style={{ flex: 1 }}>
+            <Text style={[styles.exName, { color: c.text }]}>{exerciseName(exerciseId)}</Text>
+            <Text style={{ color: c.textSecondary }}>{groupOf(exerciseId)}</Text>
+          </View>
+          <TouchableOpacity onPress={goDetail} accessibilityLabel="View full exercise detail" style={styles.iconBtn}>
+            <Icon name="arrow.up.right.circle" color={c.textSecondary} size={22} />
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity
+          activeOpacity={0.85}
+          onPress={goDetail}
+          style={[styles.anim, { backgroundColor: c.backgroundElement, borderColor: c.border }]}>
+          {anim ? (
+            <Image source={anim} style={styles.animImage} contentFit="contain" autoplay />
+          ) : (
+            <Icon name="figure.strengthtraining.traditional" color={c.textSecondary} size={40} />
+          )}
+        </TouchableOpacity>
+        <View style={{ height: Spacing.four }} />
 
         <View style={styles.headerRow}>
           <Text style={[styles.colHead, { color: c.textSecondary, width: 50 }]}>SET</Text>
@@ -172,7 +194,17 @@ const styles = StyleSheet.create({
   bar: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: Spacing.two, borderBottomWidth: StyleSheet.hairlineWidth, height: undefined, paddingBottom: 8 },
   iconBtn: { width: 40, height: 44, alignItems: 'center', justifyContent: 'center' },
   title: { flex: 1, fontSize: 20, fontWeight: '700' },
+  exHeader: { flexDirection: 'row', alignItems: 'flex-start', gap: Spacing.two },
   exName: { fontSize: 22, fontWeight: '800' },
+  anim: {
+    height: 180,
+    borderRadius: 16,
+    borderWidth: StyleSheet.hairlineWidth,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  animImage: { width: '100%', height: '100%' },
   headerRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two, paddingHorizontal: 4, marginBottom: 6 },
   colHead: { fontSize: 12, fontWeight: '700', letterSpacing: 0.5 },
   setRow: {
