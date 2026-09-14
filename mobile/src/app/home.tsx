@@ -55,20 +55,35 @@ export default function Home() {
 
   const hasWorkout = !!workout && workout.exercises.length > 0
 
+  const goDetail = (exerciseId: string) => router.push({ pathname: '/exercise-detail', params: { exerciseId } })
+
   const renderRow = (we: WorkoutExercise, i: number) => {
     const open = expanded.has(i)
     const totalSets = we.sets.length
     return (
-      <TouchableOpacity key={i} activeOpacity={0.9} onPress={() => toggle(i)}>
+      <View key={i}>
         <View style={styles.exRow}>
-          <ExerciseThumb exerciseId={we.exerciseId} size={48} />
-          <View style={{ flex: 1 }}>
-            <Text style={[styles.exName, { color: c.text }]}>{exerciseName(we.exerciseId)}</Text>
-            <Text style={{ color: c.textSecondary, marginTop: 2, fontSize: 13 }}>
-              {groupOf(we.exerciseId)} · {totalSets} {totalSets === 1 ? 'set' : 'sets'}
-            </Text>
-          </View>
-          <Icon name={open ? 'chevron.up' : 'chevron.down'} color={c.textSecondary} size={16} />
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={() => toggle(i)}
+            style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: Spacing.three }}>
+            <ExerciseThumb exerciseId={we.exerciseId} size={48} />
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.exName, { color: c.text }]}>{exerciseName(we.exerciseId)}</Text>
+              <Text style={{ color: c.textSecondary, marginTop: 2, fontSize: 13 }}>
+                {groupOf(we.exerciseId)} · {totalSets} {totalSets === 1 ? 'set' : 'sets'}
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => goDetail(we.exerciseId)}
+            accessibilityLabel={`View ${exerciseName(we.exerciseId)}`}
+            style={styles.viewBtn}>
+            <Icon name="play.circle" color={c.primary} size={24} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => toggle(i)} style={styles.chevronBtn}>
+            <Icon name={open ? 'chevron.up' : 'chevron.down'} color={c.textSecondary} size={16} />
+          </TouchableOpacity>
         </View>
         {open && (
           <View style={{ marginTop: Spacing.two, gap: 4 }}>
@@ -81,7 +96,7 @@ export default function Home() {
             ))}
           </View>
         )}
-      </TouchableOpacity>
+      </View>
     )
   }
 
@@ -143,7 +158,9 @@ const styles = StyleSheet.create({
   editBtn: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   empty: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: Spacing.two, paddingHorizontal: Spacing.four },
   emptyText: { fontSize: 16, textAlign: 'center' },
-  exRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three },
+  exRow: { flexDirection: 'row', alignItems: 'center' },
   exName: { fontSize: 16, fontWeight: '700' },
+  viewBtn: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center' },
+  chevronBtn: { width: 28, height: 40, alignItems: 'center', justifyContent: 'center' },
   setRow: { flexDirection: 'row', alignItems: 'center', paddingTop: 6, borderTopWidth: StyleSheet.hairlineWidth },
 })
