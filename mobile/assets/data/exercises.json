@@ -266,6 +266,18 @@
       ]
     },
     {
+      "id": "dumbbell-shrug",
+      "name": "Dumbbell Shrug",
+      "group": "Back",
+      "subGroup": "Traps",
+      "howto": [
+        "Hold a dumbbell in each hand at arm’s length, feet shoulder-width.",
+        "Raise your shoulders straight up toward your ears.",
+        "Pause at the top, then lower slowly.",
+        "Don’t roll your shoulders; move vertically only."
+      ]
+    },
+    {
       "id": "back-extension",
       "name": "Back Extension (Hyperextension)",
       "group": "Back",
@@ -578,6 +590,18 @@
       ]
     },
     {
+      "id": "leg-press-machine",
+      "name": "Leg Press (Machine)",
+      "group": "Quadriceps",
+      "subGroup": null,
+      "howto": [
+        "Sit upright with your back against the pad, feet flat on the platform.",
+        "Release the safety and lower under control until your knees reach ~90°.",
+        "Press through your whole foot until your legs are almost straight.",
+        "Never lock your knees hard or let them collapse inward."
+      ]
+    },
+    {
       "id": "leg-extension",
       "name": "Leg Extension",
       "group": "Quadriceps",
@@ -683,6 +707,18 @@
         "Drop your hips, flare your knees open, brace your core.",
         "Drive the floor away with the bar close to your body.",
         "Lock out hips and knees together, then lower under control."
+      ]
+    },
+    {
+      "id": "hip-abductor",
+      "name": "Hip Abductor Machine",
+      "group": "Glutes",
+      "subGroup": null,
+      "howto": [
+        "Sit with your back against the pad, knees against the inner pads.",
+        "Push your knees apart against the resistance.",
+        "Squeeze your glutes at the widest point.",
+        "Return under control to the start."
       ]
     },
     {

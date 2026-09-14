@@ -285,6 +285,16 @@
       "sha12": "247aa87dbeb2"
     }
   },
+  "dumbbell-shrug": {
+    "animation": {
+      "asset_id": "ebaba765-259f-4fcb-aea0-d5ff5a209ba7",
+      "sha12": "299bf5bb50b7"
+    },
+    "start": {
+      "asset_id": "1b3a91f5-f1b8-4dc5-b791-9937e52cdeb1",
+      "sha12": "06a47ed1fa46"
+    }
+  },
   "face-pull": {
     "animation": {
       "asset_id": "ce55d307-5c84-4e86-9213-ea49dbd9fd86",
@@ -343,6 +353,16 @@
     "start": {
       "asset_id": "8cbf0e27-57f3-4841-afe7-18c22a77eb63",
       "sha12": "b41e78a5f2fb"
+    }
+  },
+  "hip-abductor": {
+    "animation": {
+      "asset_id": "c6e9c29f-3c85-455f-a17b-47fed740c725",
+      "sha12": "bb449686e97d"
+    },
+    "start": {
+      "asset_id": "0b078166-04b2-45b1-abb4-14bce4414dd8",
+      "sha12": "641010c0792a"
     }
   },
   "hip-thrust": {
@@ -441,6 +461,16 @@
     "start": {
       "asset_id": "14f8bc69-4e7d-4b62-b15f-81fed0d0c863",
       "sha12": "ed494e01d99b"
+    }
+  },
+  "leg-press-machine": {
+    "animation": {
+      "asset_id": "5527ebde-52ab-4e9d-8f82-7f14febcc248",
+      "sha12": "ba74b40629ff"
+    },
+    "start": {
+      "asset_id": "3429935d-abbe-43b8-99a3-d9b0e707179c",
+      "sha12": "fd0b14a4ab96"
     }
   },
   "lying-leg-curl": {
