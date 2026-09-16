@@ -1,7 +1,7 @@
 // Home: week strip + the selected day's workout (expandable) or an empty state.
 import { useFocusEffect, useRouter } from 'expo-router'
 import { useCallback, useState } from 'react'
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 import { ExerciseThumb } from '@/components/ExerciseThumb'
 import { WeekBar } from '@/components/WeekBar'
@@ -11,7 +11,7 @@ import { Screen } from '@/components/ui/Screen'
 import { SupersetBadge } from '@/components/ui/SupersetBadge'
 import { Spacing } from '@/constants/theme'
 import { exerciseName, groupOf } from '@/data/catalog'
-import { getWorkoutByDate, getWorkoutDays } from '@/data/repo'
+import { deleteWorkout, getWorkoutByDate, getWorkoutDays } from '@/data/repo'
 import { groupExercises } from '@/domain/superset'
 import type { Workout, WorkoutExercise } from '@/domain/types'
 import { dayLabel, todayKey } from '@/domain/week'
@@ -51,6 +51,19 @@ export default function Home() {
   const goEdit = () => {
     startDay(selected, workout?.exercises ?? [])
     router.push({ pathname: '/build-workout', params: { day: selected } })
+  }
+  const goDelete = () => {
+    Alert.alert('Delete workout', `Delete the workout for ${dayLabel(selected)}?`, [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: async () => {
+          await deleteWorkout(selected)
+          load()
+        },
+      },
+    ])
   }
 
   const hasWorkout = !!workout && workout.exercises.length > 0
@@ -110,10 +123,18 @@ export default function Home() {
         <View style={styles.dayHeader}>
           <Text style={[styles.dayLabel, { color: c.text }]}>{dayLabel(selected)}</Text>
           {hasWorkout && (
-            <TouchableOpacity onPress={goEdit} style={styles.editBtn}>
-              <Icon name="square.and.pencil" color={c.primary} size={18} />
-              <Text style={{ color: c.primary, fontWeight: '600' }}>Edit</Text>
-            </TouchableOpacity>
+            <View style={{ flexDirection: 'row', gap: 4 }}>
+              <TouchableOpacity onPress={goEdit} style={styles.editBtn}>
+                <Icon name="square.and.pencil" color={c.primary} size={18} />
+                <Text style={{ color: c.primary, fontWeight: '600' }}>Edit</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={goDelete}
+                hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                style={styles.editBtn}>
+                <Icon name="trash" color={c.danger} size={18} />
+              </TouchableOpacity>
+            </View>
           )}
         </View>
 
