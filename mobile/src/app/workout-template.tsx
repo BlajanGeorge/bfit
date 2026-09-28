@@ -1,7 +1,7 @@
 // A saved template, full page: its exercises with their sets, and a way to edit it.
 import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router'
 import { useCallback, useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 import { ExerciseThumb } from '@/components/ExerciseThumb'
 import { Card } from '@/components/ui/Button'
@@ -10,7 +10,7 @@ import { Screen } from '@/components/ui/Screen'
 import { SupersetBadge } from '@/components/ui/SupersetBadge'
 import { Spacing } from '@/constants/theme'
 import { exerciseName, groupOf } from '@/data/catalog'
-import { getSavedWorkout } from '@/data/repo'
+import { deleteSavedWorkout, getSavedWorkout } from '@/data/repo'
 import { groupExercises } from '@/domain/superset'
 import type { SavedWorkout, WorkoutExercise } from '@/domain/types'
 import { useTheme } from '@/hooks/use-theme'
@@ -33,6 +33,21 @@ export default function WorkoutTemplate() {
     if (!t) return
     startTemplate(t.id, t.name, t.exercises)
     router.push('/build-workout')
+  }
+
+  const remove = () => {
+    if (!t) return
+    Alert.alert('Delete template', `Delete “${t.name}”?`, [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: async () => {
+          await deleteSavedWorkout(t.id)
+          router.back()
+        },
+      },
+    ])
   }
 
   const setCount = t?.exercises.reduce((n, e) => n + e.sets.length, 0) ?? 0
@@ -69,9 +84,14 @@ export default function WorkoutTemplate() {
       title={t?.name ?? 'Template'}
       leading="back"
       rightAction={
-        <TouchableOpacity onPress={edit} accessibilityLabel="Edit template" style={styles.iconBtn}>
-          <Icon name="square.and.pencil" color={c.primary} size={20} />
-        </TouchableOpacity>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity onPress={remove} accessibilityLabel="Delete template" style={styles.iconBtn}>
+            <Icon name="trash" color={c.danger} size={20} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={edit} accessibilityLabel="Edit template" style={styles.iconBtn}>
+            <Icon name="square.and.pencil" color={c.primary} size={20} />
+          </TouchableOpacity>
+        </View>
       }>
       {t && (
         <>

@@ -30,6 +30,8 @@ export default function Workouts() {
     startTemplate()
     router.push('/build-workout')
   }
+  const open = (t: SavedWorkout) =>
+    router.push({ pathname: '/workout-template', params: { id: t.id } })
   const edit = (t: SavedWorkout) => {
     startTemplate(t.id, t.name, t.exercises)
     router.push('/build-workout')
@@ -63,20 +65,29 @@ export default function Workouts() {
         <View style={{ gap: Spacing.two }}>
           {items.map((t) => (
             <Card key={t.id}>
-              <TouchableOpacity
-                onPress={() => router.push({ pathname: '/workout-template', params: { id: t.id } })}
-                accessibilityLabel={`Open ${t.name}`}>
               <View style={styles.head}>
-                <Text style={[styles.name, { color: c.text }]}>{t.name}</Text>
+                <TouchableOpacity
+                  style={{ flex: 1 }}
+                  onPress={() => open(t)}
+                  accessibilityLabel={`Open ${t.name}`}>
+                  <Text style={[styles.name, { color: c.text }]}>{t.name}</Text>
+                </TouchableOpacity>
                 <View style={styles.actions}>
-                  <TouchableOpacity onPress={() => edit(t)} style={styles.act}>
+                  <TouchableOpacity
+                    onPress={() => edit(t)}
+                    style={styles.act}
+                    accessibilityLabel={`Edit ${t.name}`}>
                     <Icon name="square.and.pencil" color={c.primary} size={18} />
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={() => remove(t)} style={styles.act}>
+                  <TouchableOpacity
+                    onPress={() => remove(t)}
+                    style={styles.act}
+                    accessibilityLabel={`Delete ${t.name}`}>
                     <Icon name="trash" color={c.danger} size={18} />
                   </TouchableOpacity>
                 </View>
               </View>
+              <TouchableOpacity onPress={() => open(t)}>
               {t.exercises.length > 0 && (
                 <View style={styles.thumbs}>
                   {t.exercises.map((e, i) => (
@@ -98,8 +109,8 @@ export default function Workouts() {
 
 const styles = StyleSheet.create({
   head: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  name: { fontSize: 17, fontWeight: '700', flex: 1 },
+  name: { fontSize: 17, fontWeight: '700' },
   actions: { flexDirection: 'row', gap: Spacing.one },
   thumbs: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.one, marginTop: Spacing.two },
-  act: { padding: Spacing.one },
+  act: { padding: Spacing.two },
 })
